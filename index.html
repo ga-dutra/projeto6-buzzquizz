@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projeto6-buzzquizz</title>
+
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top">
+        <h1>BuzzQuizz</h1>
+    </div>
+
+    <div class="home-page">
+        <div class="your-quizzes empty">
+            <!-- tirar no js junto com a classe 'empty' ao adicionar quizzes-->
+            <p>Você nã criou nenhum quizz ainda :(</p>
+            <button>Criar quiz</button>
+
+            <!-- colocar pelo js
+            <span>
+                <h4>Seus quizzes</h4>
+                <ion-icon name="add-circle"></ion-icon>
+            </span>
+
+            <div class="quizz-list">
+                colocar um a um pelo js 
+                <div class="image"><h5>Título do quizz</h5></div>
+            </div>-->        
+
+        </div>
+
+        <div class="all-quizzes">
+            <h4>Seus quizzes</h4>
+            <!--colocar pelo js--> 
+            <div class="quizz-list">
+                <div class="image"><h5>Título do quizz</h5></div>
+                <div class="image"><h5>Título do quizz</h5></div>
+                <div class="image"><h5>Título do quizz</h5></div>
+                <div class="image"><h5>Título do quizz</h5></div>
+                <div class="image"><h5>Título do quizz</h5></div>
+                <div class="image"><h5>Título do quizz</h5></div>
+            </div>
+
+        </div>
+    </div>  
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
