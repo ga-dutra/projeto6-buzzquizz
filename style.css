@@ -157,6 +157,12 @@ p {
   .quizz-list {
     min-width: 350px;
   }
+
+  .image:nth-child(2),
+  .image:nth-child(5) {
+    margin-left: 0;
+    margin-right: 0;
+}
 }
 
 /* testando commit */
