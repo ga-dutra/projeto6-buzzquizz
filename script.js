@@ -5,21 +5,11 @@ function telaInicial2() {}
 function telaCriacaoQuizz(tela) {
   const conteudo_tela = document.querySelector(".home-page");
   if (tela === 1) {
-    conteudo_tela.innerHTML = `<div class="new-quizz">  
-    <h4>Comece pelo começo</h4>
-    <form class="form-quizz1">
-        <div class="inputs-container">
-            <input type="text" id="titulo-quizz" minlength="20" maxlength="65" placeholder="Título do seu quizz" required>
-            <input type="url" id="url-img-quizz" placeholder="URL da imagem do seu quizz" required>
-            <input type="number" id="qtd-perguntas" min="3" placeholder="Quantidade de perguntas do quizz" required>
-            <input type="number" id="qtd-niveis" min="2" placeholder="Quantidade de níveis do quizz" required>
-        </div>
-        <button onclick="testaParametrosIniciais()">Prosseguir para criar perguntas</button>
-    </form>`;
+    conteudo_tela.innerHTML = criaQuizzPagina1;
   }
 
   if (tela === 3) {
-    conteudo_tela.innerHTML = ``;
+    conteudo_tela.innerHTML = criaQuizzPagina3;
   }
 }
 let titulo_quizz;
@@ -47,7 +37,6 @@ function testaParametrosIniciais() {
   ) {
     // AQUI DEVE SER CHAMADA A FUNÇÃO QUE CARREGA A PÁGINA 2 DE CRIAÇÃO DO QUIZZ
     telaCriacaoQuizz(3);
-    console.log("todos os parâmetros são válidos");
   } else {
     alert("Os parâmetros digitados não são válidos!");
   }
