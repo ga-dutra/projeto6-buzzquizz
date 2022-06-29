@@ -34,4 +34,12 @@
   .new-quizz button {
     margin-top: 29px;
   }
+
+  .form-quizz3 .inputs-container {
+    min-height: 369px;
+  }
+
+  .inputs-container textarea {
+    min-height: 177px;
+  }
 }
