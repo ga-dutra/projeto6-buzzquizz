@@ -1,5 +1,3 @@
-function telaInicial2() {}
-
 function telaCriacaoQuizz(tela) {
   let conteudo_tela = document.querySelector(".current-page");
   conteudo_tela.innerHTML = "";
@@ -208,61 +206,10 @@ function selecionaCaixaInput(element) {
 }
 
 // Páginas de criação dos quizzes
-let criarQuizzHomePage;
 let criaQuizzPagina1;
 let criaQuizzPagina2;
 let criaQuizzPagina3 = "";
 let criaQuizzPagina4;
-
-criarQuizzHomePage = `<div class="home-page">
-        <div class="your-quizzes empty">
-            <!-- tirar no js junto com a classe 'empty' ao adicionar quizzes-->
-            <p>Você não criou nenhum quizz ainda :(</p>
-            <button type="button" onclick="telaCriacaoQuizz(1)">Criar quiz</button>
-
-            <!-- colocar pelo js
-            <span>
-                <h4>Seus quizzes</h4>
-                <ion-icon name="add-circle"></ion-icon>
-            </span>
-
-            <div class="quizz-list">
-                colocar um a um pelo js 
-                <div class="image"><h5>Título do quizz</h5></div>
-            </div>-->
-
-        </div>
-
-        <div class="all-quizzes">
-            <h4>Todos os Quizzes</h4>
-            <!--colocar pelo js-->
-            <div class="quizz-list">
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-                <div class="image">
-                    <h5>Título do quizz</h5>
-                </div>
-            </div>
-
-        </div>`;
-
-function telaInicial1() {
-  document.querySelector(".current-page").innerHTML = criarQuizzHomePage;
-}
-telaInicial1();
 
 criaQuizzPagina1 = `<div class="new-quizz">  
 <h3>Comece pelo começo</h3>
@@ -364,4 +311,100 @@ function pag3() {
   return criaQuizzPagina3;
 }
 
-// Páginas de carregamento e listagem dos quizzes
+// Página inicial
+let HomePage;
+let quizzesUsuario = [];
+
+const semQuizz = `
+  <p>Você não criou nenhum quizz ainda :(</p>
+  <button onclick="telaCriacaoQuizz(1)">Criar quiz</button>
+`;
+
+const comQuizz = `
+  <span>
+    <h4>Seus quizzes</h4>
+    <ion-icon name="add-circle"></ion-icon>
+  </span>
+
+  <div class="quizz-list"></div>-->
+`;
+
+HomePage = `<div class="home-page">
+        <div class="your-quizzes empty"></div>
+
+        <div class="all-quizzes">
+            <h4>Todos os Quizzes</h4>
+            <!--colocar pelo js-->
+            <div class="quizz-list"></div>
+
+        </div>`;
+
+function telaInicial() {
+  document.querySelector(".current-page").innerHTML = HomePage;
+  carregarQuizzes();
+}
+telaInicial();
+
+// Carregamento e listagem dos quizzes
+
+function carregarQuizzes() {
+  const promise = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+
+  promise.catch(erroListagem);
+  promise.then(renderizarQuizzesTodos);
+
+  renderizarQuizzesUsuario();
+}
+
+function erroListagem(erro) {
+  alert("Erro: não foi possível carregar os quizzes!");
+}
+
+function renderizarQuizzesTodos(resposta) {
+  let lista = document.querySelector(".all-quizzes .quizz-list");
+  let quizzes = [];
+  quizzes = resposta.data;
+  const n = quizzes.length;
+
+  lista.innerHTML = "";
+
+  for (let i = n - 1; i >= n - 6; i--) {
+    lista.innerHTML += `
+    <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
+       <img src=${quizzes[i].image}>
+       <div></div>
+       <h5>${quizzes[i].title}</h5>
+    </div>`;
+  }
+}
+
+function renderizarQuizzesUsuario() {
+  let userQuizList = document.querySelector(".your-quizzes");
+
+  if (quizzesUsuario[0] === undefined) {
+    userQuizList.innerHTML = semQuizz;
+  } else {
+    userQuizList.classList.remove("empty");
+    userQuizList.innerHTML = comQuizz;
+
+    let lista = document.querySelector(".your-quizzes .quizz-list");
+    const n = quizzesUsuario.length;
+
+    lista.innerHTML = "";
+
+    for (let i = 0; i > n && i < 6; i++) {
+      lista.innerHTML += `
+        <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
+          <img src=${quizzesUsuario[i].image}>
+          <div></div>
+          <h5>${quizzesUsuario[i].title}</h5>
+        </div>`;
+    }
+  }
+}
+
+// Ezibição de um quizz
+
+function exibirQuizz(quizz) {}
