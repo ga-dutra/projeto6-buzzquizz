@@ -220,31 +220,20 @@ HomePage = `<div class="home-page">
                 <ion-icon name="add-circle"></ion-icon>
             </span>
 
-            <div class="quizz-list">
-                <div class="quizz">
-                  <img src="./img/quiz.jpg">
-                  <div></div>
-                  <h5>Título do quizz</h5>
-                </div>
-            </div>-->
+            <div class="quizz-list"></div>-->
 
         </div>
 
         <div class="all-quizzes">
             <h4>Todos os Quizzes</h4>
             <!--colocar pelo js-->
-            <div class="quizz-list">
-              <div class="quizz">
-                <img src="./img/quiz.jpg">
-                <div></div>
-                <h5>Título do quizz</h5>
-              </div>
-            </div>
+            <div class="quizz-list"></div>
 
         </div>`;
 
 function telaInicial1() {
   document.querySelector(".current-page").innerHTML = HomePage;
+  carregarQuizzesTodos();
 }
 telaInicial1();
 
@@ -252,7 +241,7 @@ function carregarQuizzesTodos() {
   const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
   
   promise.catch(erroListagem);
-  promise.then("renderizarQuizzesTodos");
+  promise.then(renderizarQuizzesTodos);
 }
 
 function erroListagem(erro) {
@@ -260,17 +249,19 @@ function erroListagem(erro) {
 }
 
 function renderizarQuizzesTodos(resposta) {
-  let lista = document.querySelector("all-quizzes .quizz-list");
-  const n = resposta.length;
+  let lista = document.querySelector(".all-quizzes .quizz-list");
+  let quizzes = [];
+  quizzes = resposta.data;
+  const n = quizzes.length;
 
-  lista.innerHTML = "";
+ lista.innerHTML = "";
 
   for(let i = n-1 ; i >= n-6 ; i --) {
     lista.innerHTML += `
     <div class="quizz">
-      <img src=${resposta[i].image}>
-      <div></div>
-      <h5>${resposta[i].title}</h5>
+       <img src=${quizzes[i].image}>
+       <div></div>
+       <h5>${quizzes[i].title}</h5>
     </div>`;
   }
 }
