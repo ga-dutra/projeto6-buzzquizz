@@ -313,7 +313,6 @@ p {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
 .final-page {
   display: flex;
   flex-direction: column;
@@ -333,12 +332,11 @@ p {
   margin-top: 10px;
 }
 
-=======
-.quizz-page{
+.quizz-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   padding-bottom: 85px;
 }
 
@@ -384,7 +382,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin-top: 42px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
@@ -397,7 +395,7 @@ p {
 
 .quizz-display h4 {
   margin-top: 8px;
-} 
+}
 
 .question-1,
 .question-2,
@@ -411,23 +409,22 @@ p {
 }
 
 .question-1 {
-  background-color: #434CA0;
+  background-color: #434ca0;
 }
 
 .question-2 {
-  background-color: #A0438D;
+  background-color: #a0438d;
 }
 
 .question-3 {
-  background-color: #EEE414;
+  background-color: #eee414;
 }
-
 
 .question-1 h3,
 .question-2 h3,
 .question-3 h3,
 .result div:first-child h3 {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .answer {
@@ -436,11 +433,11 @@ p {
 }
 
 .right h4 {
-  color: #009C22;
+  color: #009c22;
 }
 
 .wrong h4 {
-  color: #FF4B4B;
+  color: #ff4b4b;
 }
 
 .wrong {
@@ -449,7 +446,7 @@ p {
 
 .result div:first-child {
   height: 99px;
-  background-color: #EC362D;
+  background-color: #ec362d;
 }
 
 .result div:last-child {
@@ -470,39 +467,40 @@ p {
   text-align: left;
   font-weight: 700;
   line-height: 25px;
-} 
+}
 
 .result {
   padding: 15px;
 }
 
 .back-home {
-    font-family: "Roboto", sans-serif;
-    width: 260px;
-    height: 44px;
-    border: 0;
-    font-size: 21px;
-    font-weight: 400;
-    color: #818181;
-    margin-top: 16px;
-    cursor: pointer;
-    background-color: #E5E5E5;
+  font-family: "Roboto", sans-serif;
+  width: 260px;
+  height: 44px;
+  border: 0;
+  font-size: 21px;
+  font-weight: 400;
+  color: #818181;
+  margin-top: 16px;
+  cursor: pointer;
+  background-color: #e5e5e5;
 }
 
-.restart {  
-    width: 260px; 
-    height: 52px;
-    border: 0;
-    font-size: 21px;
-    font-weight: 400;
-    background-color: #ec362d;
-    border-radius: 15px;
-    color: #fff5f4;
-    margin-top: 57px;
-    cursor: pointer;
-} 
+.restart {
+  width: 260px;
+  height: 52px;
+  border: 0;
+  font-size: 21px;
+  font-weight: 400;
+  background-color: #ec362d;
+  border-radius: 15px;
+  color: #fff5f4;
+  margin-top: 57px;
+  cursor: pointer;
+}
 
->>>>>>> cac7e618436d1cd1f4c89eb39d16c1666d2978c3
 .escondido {
   display: none;
 }
+
+/* testando commit */
