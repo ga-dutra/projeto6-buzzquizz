@@ -70,7 +70,7 @@ criarQuizzHomePage = `<div class="home-page">
     </div>`
 
 criaQuizzPagina1 = `<div class="new-quizz">  
-<h4>Comece pelo começo</h4>
+<h3>Comece pelo começo</h3>
 <form class="form-quizz1">
     <div class="inputs-container">
         <input type="text" id="titulo-quizz" minlength="20" maxlength="65" placeholder="Título do seu quizz" required>
@@ -79,6 +79,82 @@ criaQuizzPagina1 = `<div class="new-quizz">
         <input type="number" id="qtd-niveis" min="2" placeholder="Quantidade de níveis do quizz" required>
     </div>
     <button onclick="testaParametrosIniciais()">Prosseguir para criar perguntas</button>
-</form>`;
+</form>
+</div>`;
+
+criaQuizzPagina1 = `
+<div class="new-quizz">  
+        <h3>Crie suas perguntas</h3>
+        <form class="form-quizz2">
+            <div class="inputs-container">
+                <h4>Pergunta 1</h4>
+                <input type="text" id="texto-pergunta1" minlength="20" placeholder="Texto da pergunta" required>
+                <input type="text" id="cor-pergunta1" placeholder="Cor do fundo da pergunta" required>
+
+                <h4>Resposta correta</h4>
+                <input type="text" id="resposta-correta1" placeholder="Resposta correta" required>
+                <input type="url" id="url-img-correta1" placeholder="URL da imagem" required>
+
+                <h4>Respostas incorretas</h4>
+                <input type="text" id="resposta-incorreta1.1" placeholder="Resposta incorreta 1" required>
+                <input type="url" id="url-img-incorreta1.1" placeholder="URL da imagem 1" required>
+                <br>
+                <input type="text" id="resposta-incorreta1.2" placeholder="Resposta incorreta 2">
+                <input type="url" id="url-img-incorreta1.2" placeholder="URL da imagem 2">
+                <br>
+                <input type="text" id="resposta-incorreta1.3" placeholder="Resposta incorreta 3">
+                <input type="url" id="url-img-incorreta1.3" placeholder="URL da imagem 3">
+            </div>
+
+            <div class="inputs-container">
+                <h4>Pergunta 2</h4>
+                <ion-icon name="create-outline" class="edit" onclick="editarPergunta(this)"></ion-icon>
+                <div class="escondido">
+                    <input type="text" id="texto-pergunta2" minlength="20" placeholder="Texto da pergunta" required>
+                    <input type="text" id="cor-pergunta2" placeholder="Cor do fundo da pergunta" required>
+
+                    <h4>Resposta correta</h4>
+                    <input type="text" id="resposta-correta2" placeholder="Resposta correta" required>
+                    <input type="url" id="url-img-correta2" placeholder="URL da imagem" required>
+
+                    <h4>Respostas incorretas</h4>
+                    <input type="text" id="resposta-incorreta2.1" placeholder="Resposta incorreta 1" required>
+                    <input type="url" id="url-img-incorreta2.1" placeholder="URL da imagem 1" required>
+                    <br>
+                    <input type="text" id="resposta-incorreta2.2" placeholder="Resposta incorreta 2">
+                    <input type="url" id="url-img-incorreta2.2" placeholder="URL da imagem 2">
+                    <br>
+                    <input type="text" id="resposta-incorreta2.3" placeholder="Resposta incorreta 3">
+                    <input type="url" id="url-img-incorreta2.3" placeholder="URL da imagem 3">
+                </div>
+            </div>
+
+            <div class="inputs-container">
+                <h4>Pergunta 3</h4>
+                <ion-icon name="create-outline" class="edit" onclick="editarPergunta(this)"></ion-icon>
+                <div class="escondido">
+                    <input type="text" id="texto-pergunta3" minlength="20" placeholder="Texto da pergunta" required>
+                    <input type="text" id="cor-pergunta3" placeholder="Cor do fundo da pergunta" required>
+
+                    <h4>Resposta correta</h4>
+                    <input type="text" id="resposta-correta3" placeholder="Resposta correta" required>
+                    <input type="url" id="url-img-correta3" placeholder="URL da imagem" required>
+
+                    <h4>Respostas incorretas</h4>
+                    <input type="text" id="resposta-incorreta3.1" placeholder="Resposta incorreta 1" required>
+                    <input type="url" id="url-img-incorreta3.1" placeholder="URL da imagem 1" required>
+                    <br>
+                    <input type="text" id="resposta-incorreta3.2" placeholder="Resposta incorreta 2">
+                    <input type="url" id="url-img-incorreta3.2" placeholder="URL da imagem 2">
+                    <br>
+                    <input type="text" id="resposta-incorreta3.3" placeholder="Resposta incorreta 3">
+                    <input type="url" id="url-img-incorreta3.3" placeholder="URL da imagem 3">
+                </div>
+            </div>
+
+            <button onclick="testaParametrosIniciais()">Prosseguir para criar níveis</button>
+        </form> 
+    </div>
+`;
 
 // Páginas de carregamento e listagem dos quizzes

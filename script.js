@@ -57,3 +57,21 @@ function selecionaNivel(element) {
   const childNode = parentNode.childNodes[3]; // acessa a div container
   childNode.classList.toggle("escondido");
 }
+
+function editarPergunta(elemento) {
+  const no = elemento.parentNode.children;//
+  no[2].classList.toggle("escondido");
+}
+
+function checarCor(str) {
+  if(str[0] !== "#" || str.length !== 7) {
+    alert(str + " não é uma cor válida");
+    return;
+  } else {
+    for(let i = 1 ; i < str.length ; i ++) {
+      if("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(str[i]) < 0)
+      alert(str + " não é uma cor válida");
+      return;
+    }
+  }
+}

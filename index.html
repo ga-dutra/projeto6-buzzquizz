@@ -19,13 +19,85 @@
         <h1>BuzzQuizz</h1>
     </div>
 
-    
+    <div class="new-quizz">  
+        <h3>Crie suas perguntas</h3>
+        <form class="form-quizz2">
+            <div class="inputs-container">
+                <h4>Pergunta 1</h4>
+                <input type="text" id="texto-pergunta1" minlength="20" placeholder="Texto da pergunta" required>
+                <input type="text" id="cor-pergunta1" placeholder="Cor do fundo da pergunta" required>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
-        <script src="./script.js"></script>
-        <script src="./pages.js"></script>
+                <h4>Resposta correta</h4>
+                <input type="text" id="resposta-correta1" placeholder="Resposta correta" required>
+                <input type="url" id="url-img-correta1" placeholder="URL da imagem" required>
+
+                <h4>Respostas incorretas</h4>
+                <input type="text" id="resposta-incorreta1.1" placeholder="Resposta incorreta 1" required>
+                <input type="url" id="url-img-incorreta1.1" placeholder="URL da imagem 1" required>
+                <br>
+                <input type="text" id="resposta-incorreta1.2" placeholder="Resposta incorreta 2">
+                <input type="url" id="url-img-incorreta1.2" placeholder="URL da imagem 2">
+                <br>
+                <input type="text" id="resposta-incorreta1.3" placeholder="Resposta incorreta 3">
+                <input type="url" id="url-img-incorreta1.3" placeholder="URL da imagem 3">
+            </div>
+
+            <div class="inputs-container">
+                <h4>Pergunta 2</h4>
+                <ion-icon name="create-outline" class="edit" onclick="editarPergunta(this)"></ion-icon>
+                <div class="escondido">
+                    <input type="text" id="texto-pergunta2" minlength="20" placeholder="Texto da pergunta" required>
+                    <input type="text" id="cor-pergunta2" placeholder="Cor do fundo da pergunta" required>
+
+                    <h4>Resposta correta</h4>
+                    <input type="text" id="resposta-correta2" placeholder="Resposta correta" required>
+                    <input type="url" id="url-img-correta2" placeholder="URL da imagem" required>
+
+                    <h4>Respostas incorretas</h4>
+                    <input type="text" id="resposta-incorreta2.1" placeholder="Resposta incorreta 1" required>
+                    <input type="url" id="url-img-incorreta2.1" placeholder="URL da imagem 1" required>
+                    <br>
+                    <input type="text" id="resposta-incorreta2.2" placeholder="Resposta incorreta 2">
+                    <input type="url" id="url-img-incorreta2.2" placeholder="URL da imagem 2">
+                    <br>
+                    <input type="text" id="resposta-incorreta2.3" placeholder="Resposta incorreta 3">
+                    <input type="url" id="url-img-incorreta2.3" placeholder="URL da imagem 3">
+                </div>
+            </div>
+
+            <div class="inputs-container">
+                <h4>Pergunta 3</h4>
+                <ion-icon name="create-outline" class="edit" onclick="editarPergunta(this)"></ion-icon>
+                <div class="escondido">
+                    <input type="text" id="texto-pergunta3" minlength="20" placeholder="Texto da pergunta" required>
+                    <input type="text" id="cor-pergunta3" placeholder="Cor do fundo da pergunta" required>
+
+                    <h4>Resposta correta</h4>
+                    <input type="text" id="resposta-correta3" placeholder="Resposta correta" required>
+                    <input type="url" id="url-img-correta3" placeholder="URL da imagem" required>
+
+                    <h4>Respostas incorretas</h4>
+                    <input type="text" id="resposta-incorreta3.1" placeholder="Resposta incorreta 1" required>
+                    <input type="url" id="url-img-incorreta3.1" placeholder="URL da imagem 1" required>
+                    <br>
+                    <input type="text" id="resposta-incorreta3.2" placeholder="Resposta incorreta 2">
+                    <input type="url" id="url-img-incorreta3.2" placeholder="URL da imagem 2">
+                    <br>
+                    <input type="text" id="resposta-incorreta3.3" placeholder="Resposta incorreta 3">
+                    <input type="url" id="url-img-incorreta3.3" placeholder="URL da imagem 3">
+                </div>
+            </div>
+
+            <button onclick="testaParametrosIniciais()">Prosseguir para criar níveis</button>
+        </form> 
+    </div>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <script src="./script.js"></script>
+    <script src="./pages.js"></script>
 </body>
 
 </html>
