@@ -1,26 +1,24 @@
-function telaInicial1() {}
-
 function telaInicial2() {}
 
 function telaCriacaoQuizz(tela) {
-  const conteudo_tela = document.querySelector(".home-page");
+  const conteudo_tela = document.querySelector(".current-page");
   if (tela === 1) {
     conteudo_tela.innerHTML = criaQuizzPagina1;
   }
 
   if (tela === 3) {
-    conteudo_tela.innerHTML = criaQuizzPagina3;
+    conteudo_tela.innerHTML = pag3();
   }
 }
 let titulo_quizz;
 let url_img_quizz;
 let qtd_perguntas;
-let qtd_niveis;
+let qtd_niveis = 0;
 
 function testaParametrosIniciais() {
   // obtem parâmetros dos inputs
-  titulo = document.querySelector("#titulo_quizz").value;
-  url = document.querySelector("#url_img_quizz").value;
+  titulo = document.querySelector("#titulo-quizz").value;
+  url = document.querySelector("#url-img-quizz").value;
   qtd_perguntas = document.querySelector("#qtd-perguntas").value;
   qtd_niveis = document.querySelector("#qtd-niveis").value;
   // verifica validade dos parâmetros
