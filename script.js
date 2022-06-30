@@ -361,7 +361,7 @@ function telaInicial() {
   document.querySelector(".current-page").innerHTML = HomePage;
   carregarQuizzes();
 }
-telaInicial();
+//telaInicial();
 
 // Carregamento e listagem dos quizzes
 
