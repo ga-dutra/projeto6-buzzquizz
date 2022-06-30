@@ -390,7 +390,7 @@ function renderizarQuizzesTodos(resposta) {
 
   for (let i = n - 1; i >= n - 6; i--) {
     lista.innerHTML += `
-    <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
+    <div class="quizz" onclick="exibirQuizz(${quizzes[i]})">
        <img src=${quizzes[i].image}>
        <div></div>
        <h5>${quizzes[i].title}</h5>
@@ -423,6 +423,6 @@ function renderizarQuizzesUsuario() {
   }
 }
 
-// Ezibição de um quizz
+// Exibição de um quizz
 
 function exibirQuizz(quizz) {}
