@@ -372,6 +372,7 @@ p {
 .quizz-display img {
   width: 330px;
   height: 175px;
+  object-fit: cover;
 }
 
 .quizz-display h4 {
@@ -446,8 +447,9 @@ p {
 
 .result div:last-child p {
   width: 328px;
-  max-height: 273px;
   text-align: left;
+  font-weight: 700;
+  line-height: 25px;
 } 
 
 .result {
