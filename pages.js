@@ -2,7 +2,7 @@
 let criarQuizzHomePage;
 let criaQuizzPagina1;
 let criaQuizzPagina2;
-let criaQuizzPagina3;
+let criaQuizzPagina3 = "";
 let criaQuizzPagina4;
 
 criarQuizzHomePage = `<div class="home-page">
@@ -48,26 +48,12 @@ criarQuizzHomePage = `<div class="home-page">
                 </div>
             </div>
 
-        </div>
+        </div>`;
 
-
-        <div class="new-quizz">
-            <h4>Agora, decida os níveis!</h4>
-            <form class="form-quizz3">
-                <div onclick="selecionaNivel(this)" class="nivel">
-                    <h5>Nível 1</h5>
-                    <ion-icon name="create-outline"></ion-icon>
-                </div>
-                <div class="inputs-container">
-                    <input type="text" id="titulo-nivel-${i}" minlength="10" placeholder="Título do nível" required>
-                    <input type="url" id="url" placeholder="% de acerto mínima" required>
-                    <input type="number" id="qtd-perguntas" min="3" placeholder="URL da imagem do nível" required>
-                    <textarea name="" id="" placeholder="Descrição do nível" cols="30" rows="10"></textarea>
-                </div>
-                <button onclick="testaParametrosIniciais()">Finalizar Quizz</button>
-            </form>
-        </div>
-    </div>`
+function telaInicial1() {
+  document.querySelector(".current-page").innerHTML = criarQuizzHomePage;
+}
+telaInicial1();
 
 criaQuizzPagina1 = `<div class="new-quizz">  
 <h4>Comece pelo começo</h4>
@@ -80,5 +66,35 @@ criaQuizzPagina1 = `<div class="new-quizz">
     </div>
     <button onclick="testaParametrosIniciais()">Prosseguir para criar perguntas</button>
 </form>`;
+
+function pag3() {
+  criaQuizzPagina3 += `<div class="new-quizz">
+        <h4>Agora, decida os níveis!</h4>`;
+  for (i = 0; i < qtd_niveis; i++) {
+    criaQuizzPagina3 += `
+        <form class="form-quizz3">
+            <div onclick="selecionaNivel(this)" class="nivel">
+                <h3>Nível ${i + 1}</h3>
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="inputs-container">
+                <input type="text" id="titulo-nivel-${
+                  i + 1
+                }" minlength="10" placeholder="Título do nível" required>
+                <input type="number" id="%acerto-nivel-${
+                  i + 1
+                }" placeholder="% de acerto mínima" min="0" min="100" required>
+                <input type="url" id="url-nivel-${
+                  i + 1
+                }" min="3" placeholder="URL da imagem do nível" required>
+                <textarea name="" id="descricao-nivel-${
+                  i + 1
+                }" placeholder="Descrição do nível" cols="30" rows="10"></textarea>
+            </div> </form>`;
+  }
+  criaQuizzPagina3 += `<button>Finalizar Quizz</button>     
+    </div>`;
+  return criaQuizzPagina3;
+}
 
 // Páginas de carregamento e listagem dos quizzes
