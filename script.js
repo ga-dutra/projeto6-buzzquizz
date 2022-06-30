@@ -57,7 +57,7 @@ function selecionaNivel(element) {
 }
 
 function editarPergunta(elemento) {
-  const no = elemento.parentNode.children;//
+  const no = elemento.parentNode.children
   no[2].classList.toggle("escondido");
 }
 

@@ -68,6 +68,7 @@ criaQuizzPagina1 = `<div class="new-quizz">
 </form>
 </div>`;
 
+function pag2() {
 criaQuizzPagina2 = `
 <div class="new-quizz">  
         <h3>Crie suas perguntas</h3>
@@ -142,6 +143,7 @@ criaQuizzPagina2 = `
         </form> 
     </div>
 `;
+}
 
 function pag3() {
   criaQuizzPagina3 += `<div class="new-quizz">
