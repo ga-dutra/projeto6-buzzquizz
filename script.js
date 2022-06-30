@@ -14,23 +14,23 @@ function telaCriacaoQuizz(tela) {
   }
 
   if (tela === 4) {
-    conteudo_tela.innerHTML = ``;
+    conteudo_tela.innerHTML = pag4();
   }
 }
 let titulo_quizz;
-let url_img_quizz;
+let url_quizz;
 let qtd_perguntas;
 let qtd_niveis;
 
 function testaParametrosPag1() {
   // obtem parâmetros dos inputs
-  titulo = document.querySelector("#titulo-quizz").value;
-  url = document.querySelector("#url-img-quizz").value;
+  titulo_quizz = document.querySelector("#titulo-quizz").value;
+  url_quizz = document.querySelector("#url-img-quizz").value;
   qtd_perguntas = document.querySelector("#qtd-perguntas").value;
   qtd_niveis = document.querySelector("#qtd-niveis").value;
   // verifica validade dos parâmetros
-  const titulo_valido = titulo.length >= 20 && titulo.length <= 65;
-  const url_valido = checkUrl(url);
+  const titulo_valido = titulo_quizz.length >= 20 && titulo_quizz.length <= 65;
+  const url_valido = checkUrl(url_quizz);
   const qtd_perguntas_valido = qtd_perguntas >= 3;
   const qtd_niveis_valido = qtd_niveis >= 2;
 
@@ -208,7 +208,7 @@ function selecionaCaixaInput(element) {
 // Páginas de criação dos quizzes
 let criaQuizzPagina1;
 let criaQuizzPagina2;
-let criaQuizzPagina3 = "";
+let criaQuizzPagina3;
 let criaQuizzPagina4;
 
 criaQuizzPagina1 = `<div class="new-quizz">  
@@ -310,6 +310,24 @@ function pag3() {
   console.log(criaQuizzPagina3);
   return criaQuizzPagina3;
 }
+
+function pag4() {
+  criaQuizzPagina4 = `<div class="new-quizz final-page">
+  <h3>Seu quizz está pronto!</h3>
+
+  <div class="quizz" onclick="exibirQuizz()">
+      <img src=${url_quizz}>
+      <div></div>
+      <h5>${titulo_quizz}</h5>
+  </div>
+  <button type="button" onclick="">Acessar Quizz</button>
+  <p>Voltar para home</p>
+</div>`;
+  return criaQuizzPagina4;
+}
+
+// Enviar quizz finalizado
+function enviaQuizz() {}
 
 // Página inicial
 let HomePage;
