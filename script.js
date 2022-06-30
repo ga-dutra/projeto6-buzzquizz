@@ -1,5 +1,3 @@
-function telaInicial2() {}
-
 function telaCriacaoQuizz(tela) {
   const conteudo_tela = document.querySelector(".current-page");
   if (tela === 1) {
@@ -235,11 +233,11 @@ HomePage = `<div class="home-page">
 
         </div>`;
 
-function telaInicial1() {
+function telaInicial() {
   document.querySelector(".current-page").innerHTML = HomePage;
   carregarQuizzes();
 }
-telaInicial1();
+telaInicial();
 
 // Carregamento e listagem dos quizzes
 
@@ -267,7 +265,7 @@ function renderizarQuizzesTodos(resposta) {
 
   for(let i = n-1 ; i >= n-6 ; i --) {
     lista.innerHTML += `
-    <div class="quizz">
+    <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
        <img src=${quizzes[i].image}>
        <div></div>
        <h5>${quizzes[i].title}</h5>
@@ -284,18 +282,25 @@ function renderizarQuizzesUsuario() {
       userQuizList.classList.remove("empty");
       userQuizList.innerHTML = comQuizz;
 
-    let lista = document.querySelector(".your-quizzes .quizz-list");
-    const n = quizzesUsuario.length;
+      let lista = document.querySelector(".your-quizzes .quizz-list");
+      const n = quizzesUsuario.length;
 
-    lista.innerHTML = "";
+      lista.innerHTML = "";
 
-    for(let i = 0 ; i > n && i < 6; i ++) {
-      lista.innerHTML += `
-      <div class="quizz">
-         <img src=${quizzesUsuario[i].image}>
-         <div></div>
-         <h5>${quizzesUsuario[i].title}</h5>
-      </div>`;
+      for(let i = 0 ; i > n && i < 6; i ++) {
+        lista.innerHTML += `
+        <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
+          <img src=${quizzesUsuario[i].image}>
+          <div></div>
+          <h5>${quizzesUsuario[i].title}</h5>
+        </div>`;
+      }
     }
 }
+
+
+// Ezibição de um quizz
+
+function exibirQuizz(quizz) {
+
 }
