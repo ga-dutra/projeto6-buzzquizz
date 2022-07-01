@@ -671,15 +671,11 @@ function exibirResultado(score, id, tipo) {
     }
   }
 
-<<<<<<< HEAD
   node = document.querySelector(".restart");
   node.parentNode.removeChild(node);
   node = document.querySelector(".back-home");
   node.parentNode.removeChild(node);
   
-  
-=======
->>>>>>> 37f1cffcdd8c99a1b700d82682c86d739fa1d984
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
       <div><h3>${score}% de acerto: ${nivel.title}</h3></div>
