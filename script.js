@@ -723,5 +723,9 @@ function exibirResultado(score, id, tipo) {
 //Bonus: loading
 
 function paginaLoading() {
-  document.querySelector(".loading-page").classList.toggle("escondido");    
+  const node = document.querySelector(".loading-page");
+  
+  if(node != undefined) {
+    node.classList.toggle("escondido");   
+  }  
 }
