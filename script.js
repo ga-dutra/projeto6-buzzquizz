@@ -427,7 +427,21 @@ function renderizarQuizzesUsuario() {
 
 // Exibição de um quizz
 
-function buscaPorId(id, lista) {
+function buscaPorId(id, tipo) {
+  let lista;
+
+  if(tipo === "todos") {
+    lista = quizzes;
+  } 
+  
+  if(tipo === "usuario") {
+    lista = quizzesUsuario;
+  }
+
+  if(lista == undefined) {
+    alert("Erro: Não foi possível encontrar o quizz!");
+  }
+
   for(let i = 0 ; i < lista.length ; i++) {
     if(lista[i].id === id) {
       return lista[i];
@@ -440,20 +454,11 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
+let acertos;
+
 function exibirQuizz(id, tipo) {
-  let quizz;
-
-  if(tipo === "todos") {
-    quizz = buscaPorId(id, quizzes)
-  } 
-  
-  if(tipo === "usuario") {
-    quizz = buscaPorId(id, quizzesUsuario)
-  }
-
-  if(quizz == undefined) {
-    return;
-  }
+  let quizz = buscaPorId(id, tipo);
+  acertos = 0;
 
   for(let i = 0 ; i < 3 ; i ++) {
     quizz.questions[i].answers.sort(comparador);
@@ -475,7 +480,7 @@ function exibirQuizz(id, tipo) {
    
   for(let i = 0 ; i < n ; i ++) {
     node.innerHTML += `
-      <div class="quizz-display">
+      <div class="quizz-display ${i + 1}">
         <div class="question"  style="background-color: ${quizz.questions[i].color}"><h3>${quizz.questions[i].text}</h3></div>
         <div class="answers-${i + 1}"></div>  
       </div> `;
@@ -488,7 +493,7 @@ function exibirQuizz(id, tipo) {
     for(let j = 0 ; j < n ; j ++) {
       let elemento = quizz.questions[i].answers[j]
       node.innerHTML += `
-      <div class="answer">
+      <div class="answer" onclick="checaResposta(this, ${id}, '${tipo}', ${j})">
         <img src="${elemento.image}">
         <h4>${elemento.text}</h4>
       </div>`;
@@ -498,8 +503,92 @@ function exibirQuizz(id, tipo) {
   node = document.querySelector(".quizz-page");
 
   node.innerHTML += `
-    <button class="restart" onclick="exibirQuizz(quizz)">Reiniciar Quizz</button>
+    <button class="restart" onclick="exibirQuizz(${id}, '${tipo}')">Reiniciar Quizz</button>
 
     <button class="back-home" onclick="telaInicial()">Voltar para home</button>
     `;
+
+    document.querySelector(".title").scrollIntoView();
 }
+
+
+function checaResposta(resposta, id, tipo, j) {
+  if(resposta.classList.contains("right") || resposta.classList.contains("wrong")) {
+    return;
+  }
+  
+  let quizz = buscaPorId(id, tipo);
+  
+  let opcoes = resposta.parentNode.childNodes;
+  let gabarito = quizz.questions[j].answers;
+  let n = opcoes.length;
+
+  for(let i = 0 ; i < (n - 1) ; i += 2) {
+    if(gabarito[i/2].isCorrectAnswer === true) {
+      opcoes[i + 1].classList.add("right");
+    } else {
+        opcoes[i + 1].classList.add("wrong");
+      }
+  }
+
+  if(resposta.classList.contains("right")) {
+    acertos ++;
+  }
+
+  let cliques = document.querySelectorAll(".right").length;
+  
+  let proxima;
+  if(resposta.parentNode.parentNode.classList.contains("1")) {
+    proxima = resposta.parentNode.parentNode.parentNode.childNodes[5];
+    setTimeout(proximoItem, 2000, proxima);
+  }
+  if(resposta.parentNode.parentNode.classList.contains("2")) {
+    proxima = resposta.parentNode.parentNode.parentNode.childNodes[7];
+    setTimeout(proximoItem, 2000, proxima);
+  }
+ 
+  if(cliques === quizz.questions.length) {
+    const score = calculaPontuacao(cliques);
+    exibirResultado(score, id, tipo);
+  }  
+}
+
+
+function calculaPontuacao(n) {
+  const score = Math.round((acertos/n)*100);
+  return score;
+}
+
+function proximoItem(elemento) {
+  elemento.scrollIntoView();
+}
+
+function exibirResultado(score, id, tipo) {
+  document.querySelector(".quizz-page").innerHTML += `
+    <div class="quizz-display result">
+      <div><h3>XX% de acerto: texto texto texto</h3></div>
+      <div>
+        <img src="./img/quiz.jpg">
+        <p>texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto 
+            texto texto texto texto texto texto texto texto
+            texto texto texto texto texto texto texto</p>
+      </div>
+  </div>`;
+
+  const resultado = document.querySelector(".result")
+  setTimeout(proximoItem, 2000, resultado);
+}
+
+//HTML do resultado:
+
+` <div class="quizz-display result">
+<div><h3>XX% de acerto: texto texto texto</h3></div>
+<div>
+    <img src="./img/quiz.jpg">
+    <p>texto texto texto texto texto texto texto texto 
+        texto texto texto texto texto texto texto texto 
+        texto texto texto texto texto texto texto texto
+        texto texto texto texto texto texto texto</p>
+</div>
+</div>`

@@ -426,15 +426,15 @@ p {
   margin-top: 18px;
 }
 
-.true h4 {
+.right h4 {
   color: #009c22;
 }
 
-.false h4 {
+.wrong h4 {
   color: #ff4b4b;
 }
 
-.false {
+.wrong {
   opacity: 0.3;
 }
 
