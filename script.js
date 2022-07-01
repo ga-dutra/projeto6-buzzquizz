@@ -23,6 +23,12 @@ let qtd_perguntas;
 let qtd_niveis;
 
 function testaParametrosPag1() {
+  quizz_usuario = {
+    title: document.querySelector(`#titulo-quizz`).value,
+    image: document.querySelector(`#url-img-quizz`).value,
+    questions: "",
+    levels: "",
+  };
   // obtem parâmetros dos inputs
   titulo_quizz = document.querySelector("#titulo-quizz").value;
   url_quizz = document.querySelector("#url-img-quizz").value;
@@ -40,7 +46,6 @@ function testaParametrosPag1() {
     qtd_perguntas_valido &&
     qtd_niveis_valido
   ) {
-    // AQUI DEVE SER CHAMADA A FUNÇÃO QUE CARREGA A PÁGINA 2 DE CRIAÇÃO DO QUIZZ
     telaCriacaoQuizz(2);
   } else {
     alert("Os parâmetros digitados não são válidos!");
@@ -56,6 +61,21 @@ function testaParametrosPag2() {
   let imgs_incorretas = [];
 
   for (i = 0; i < qtd_perguntas; i++) {
+    questions[i] = {
+      title: document.querySelector(`#texto-pergunta${i + 1}`).value,
+      color: document.querySelector(`#cor-pergunta${i + 1}`).value,
+      answers: [],
+    };
+  }
+
+  quizz_usuario.questions = questions;
+  let wrong_answers = [[]];
+  let wrong_imgs = [[]];
+  for (i = 1; i < qtd_perguntas; i++) {
+    wrong_answers.push([]);
+    wrong_imgs.push([]);
+  }
+  for (i = 0; i < qtd_perguntas; i++) {
     perguntas.push(document.querySelector(`#texto-pergunta${i + 1}`).value);
     cores.push(document.querySelector(`#cor-pergunta${i + 1}`).value);
     respostas_corretas.push(
@@ -64,13 +84,21 @@ function testaParametrosPag2() {
     respostas_incorretas.push(
       document.querySelector(`#resposta-incorreta${i + 1}-1`).value
     );
+    wrong_answers[i].push(
+      document.querySelector(`#resposta-incorreta${i + 1}-1`).value
+    );
     respostas_incorretas.push(
+      document.querySelector(`#resposta-incorreta${i + 1}-2`).value
+    );
+    wrong_answers[i].push(
       document.querySelector(`#resposta-incorreta${i + 1}-2`).value
     );
     respostas_incorretas.push(
       document.querySelector(`#resposta-incorreta${i + 1}-3`).value
     );
-
+    wrong_answers[i].push(
+      document.querySelector(`#resposta-incorreta${i + 1}-3`).value
+    );
     imgs_corretas.push(
       document.querySelector(`#url-img-correta${i + 1}`).value
     );
@@ -78,6 +106,16 @@ function testaParametrosPag2() {
     imgs_incorretas.push(
       document.querySelector(`#url-img-incorreta${i + 1}-1`).value
     );
+    wrong_imgs[i].push(
+      document.querySelector(`#url-img-incorreta${i + 1}-1`).value
+    );
+    wrong_imgs[i].push(
+      document.querySelector(`#url-img-incorreta${i + 1}-2`).value
+    );
+    wrong_imgs[i].push(
+      document.querySelector(`#url-img-incorreta${i + 1}-3`).value
+    );
+
     imgs_incorretas.push(
       document.querySelector(`#url-img-incorreta${i + 1}-2`).value
     );
@@ -107,18 +145,41 @@ function testaParametrosPag2() {
   const imgs_corretas_validas = imgs_corretas.filter(checkUrl);
   const imgs_incorretas_validas = imgs_incorretas.filter(checkUrl);
 
+  for (i = 0; i < qtd_perguntas; i++) {
+    for (j = 0; j < qtd_perguntas; j++) {
+      if (j === 0) {
+        questions[i].answers[j] = {
+          text: document.querySelector(`#resposta-correta${i + 1}`).value,
+          image: document.querySelector(`#url-img-correta${i + 1}`).value,
+          isCorrectAnswer: true,
+        };
+      } else if (
+        wrong_answers[i][j - 1] !== "" &&
+        wrong_imgs[i][j - 1] !== ""
+      ) {
+        questions[i].answers[j] = {
+          text: wrong_answers[i][j - 1],
+          image: wrong_imgs[i][j - 1],
+          isCorrectAnswer: false,
+        };
+      }
+    }
+  }
+
   if (
     perguntas.length === perguntas_validas.length &&
     cores.length === cores_validas.length &&
-    respostas_corretas.length === respostas_corretas_validas.length &&
-    respostas_incorretas.length === respostas_incorretas_validas.length &&
-    imgs_corretas.length === imgs_corretas_validas.length &&
-    imgs_incorretas.length === imgs_incorretas_validas.length
+    respostas_corretas_validas.length >= qtd_perguntas &&
+    respostas_incorretas_validas.length >= qtd_perguntas &&
+    imgs_corretas_validas.length >= qtd_perguntas &&
+    imgs_incorretas_validas.length >= qtd_perguntas
   ) {
     alert("está tudo certo!");
     telaCriacaoQuizz(3);
   } else {
-    alert("Por favor, preencha os parâmetros corretamente!");
+    alert(
+      `Por favor, preencha os parâmetros corretamente!\nCada pergunta deve conter pelo menos uma resposta correta e uma incorreta.`
+    );
   }
 }
 
@@ -127,6 +188,18 @@ function testaParametrosPag3() {
   let porcentagem = [];
   let url_nivel = [];
   let descricao_nivel = [];
+
+  for (i = 0; i < qtd_niveis; i++) {
+    levels[i] = {
+      title: String(document.querySelector(`#titulo-nivel${i + 1}`).value),
+      image: String(document.querySelector(`#url-nivel${i + 1}`).value),
+      text: String(document.querySelector(`#descricao-nivel${i + 1}`).value),
+      minValue: String(
+        document.querySelector(`#porcentagem-nivel${i + 1}`).value
+      ),
+    };
+  }
+  quizz_usuario.levels = levels;
 
   for (i = 0; i < qtd_niveis; i++) {
     titulo_nivel.push(document.querySelector(`#titulo-nivel${i + 1}`).value);
@@ -163,7 +236,7 @@ function testaParametrosPag3() {
     descricao_nivel.length === descricao_nivel_validas.length
   ) {
     alert("está tudo certo!");
-    telaCriacaoQuizz(4);
+    criaQuizzUsuario();
   } else {
     alert("Por favor, preencha os parâmetros corretamente!");
   }
@@ -307,7 +380,6 @@ function pag3() {
   }
   criaQuizzPagina3 += `<button onclick="testaParametrosPag3()" type="button">Finalizar Quizz</button>     
     </div>`;
-  console.log(criaQuizzPagina3);
   return criaQuizzPagina3;
 }
 
@@ -327,7 +399,27 @@ function pag4() {
 }
 
 // Enviar quizz finalizado
-function enviaQuizz() {}
+let quizz_usuario = {};
+let questions = [];
+let answers = [];
+let levels = [];
+
+function criaQuizzUsuario() {
+  const promise = axios.post(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+    quizz_usuario
+  );
+  promise.catch(erroEnvioQuizz);
+  promise.then(chamaTelaFinalCriacaoQuizz);
+}
+
+function erroEnvioQuizz() {
+  alert("Ocorreu um erro ao tentarmos enviar o quizz para o servidor!");
+}
+
+function chamaTelaFinalCriacaoQuizz() {
+  telaCriacaoQuizz(4);
+}
 
 // Página inicial
 let HomePage;

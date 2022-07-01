@@ -51,15 +51,14 @@
     max-width: 100vw;
   }
 
-
-  .quizz-page{
+  .quizz-page {
     padding-bottom: 66px;
   }
-  
+
   .title {
     height: 142px;
   }
-  
+
   .title img {
     height: 142px;
   }
@@ -67,23 +66,23 @@
   .title h2 {
     font-size: 19px;
   }
-  
+
   .quizz-display {
     width: 375px;
     padding: 18px;
     margin-top: 24px;
   }
-  
+
   .quizz-display img {
     width: 163px;
     height: 113px;
   }
-  
+
   .quizz-display h4 {
     margin-top: 4px;
     font-size: 13px;
-  } 
-  
+  }
+
   .question-1,
   .question-2,
   .question-3,
@@ -91,45 +90,44 @@
     width: 100%;
     height: 89px;
   }
-    
-  
+
   .answer {
     cursor: pointer;
     margin-top: 9px;
   }
-  
+
   .result div:last-child {
     margin-top: 9px;
     flex-direction: column;
   }
-  
+
   .result div:last-child img {
     width: 340px;
     height: 255px;
     margin-right: 0;
   }
-  
+
   .result div:last-child p {
     width: 340px;
     max-height: 100px;
     margin-top: 9px;
-  } 
-  
+  }
+
   .result {
     padding: 18px;
   }
-  
+
   .back-home {
-      width: 220px;
-      font-size: 18px;
-      margin-top: 8px;
+    width: 220px;
+    font-size: 18px;
+    margin-top: 8px;
   }
-  
-  .restart {  
-      width: 220px; 
-      height: 44px;
-      font-size: 18px;
-      font-weight: 400;
-      margin-top: 34px;
+
+  .restart {
+    width: 220px;
+    height: 44px;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 34px;
   }
 }
