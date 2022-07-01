@@ -476,13 +476,13 @@ let quizzes = [];
 
 function renderizarQuizzesTodos(resposta) {
   let lista = document.querySelector(".all-quizzes .quizz-list");
- 
+
   quizzes = resposta.data;
   const n = quizzes.length;
 
   lista.innerHTML = "";
 
-  for (let i = 0; i < n ; i ++) {
+  for (let i = 0; i < n; i++) {
     lista.innerHTML += `
     <div class="quizz" onclick="exibirQuizz(${quizzes[i].id}, 'todos')">
        <img src=${quizzes[i].image}>
@@ -506,7 +506,7 @@ function renderizarQuizzesUsuario() {
 
     lista.innerHTML = "";
 
-    for (let i = 0 ; i > n ; i ++) {
+    for (let i = 0; i > n; i++) {
       lista.innerHTML += `
         <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i].id}, 'usuario')">
           <img src=${quizzesUsuario[i].image}>
@@ -522,28 +522,28 @@ function renderizarQuizzesUsuario() {
 function buscaPorId(id, tipo) {
   let lista;
 
-  if(tipo === "todos") {
+  if (tipo === "todos") {
     lista = quizzes;
-  } 
-  
-  if(tipo === "usuario") {
+  }
+
+  if (tipo === "usuario") {
     lista = quizzesUsuario;
   }
 
-  if(lista == undefined) {
+  if (lista == undefined) {
     alert("Erro: Não foi possível encontrar o quizz!");
   }
 
-  for(let i = 0 ; i < lista.length ; i++) {
-    if(lista[i].id === id) {
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].id === id) {
       return lista[i];
     }
   }
   alert("Erro: Não foi possível encontrar o quizz!");
 }
 
-function comparador() { 
-	return Math.random() - 0.5; 
+function comparador() {
+  return Math.random() - 0.5;
 }
 
 let acertos;
@@ -552,7 +552,7 @@ function exibirQuizz(id, tipo) {
   let quizz = buscaPorId(id, tipo);
   acertos = 0;
 
-  for(let i = 0 ; i < 3 ; i ++) {
+  for (let i = 0; i < 3; i++) {
     quizz.questions[i].answers.sort(comparador);
   }
 
@@ -569,21 +569,23 @@ function exibirQuizz(id, tipo) {
 
   let n = quizz.questions.length;
   node = document.querySelector(".quizz-page");
-   
-  for(let i = 0 ; i < n ; i ++) {
+
+  for (let i = 0; i < n; i++) {
     node.innerHTML += `
       <div class="quizz-display ${i + 1}">
-        <div class="question"  style="background-color: ${quizz.questions[i].color}"><h3>${quizz.questions[i].text}</h3></div>
+        <div class="question"  style="background-color: ${
+          quizz.questions[i].color
+        }"><h3>${quizz.questions[i].text}</h3></div>
         <div class="answers-${i + 1}"></div>  
       </div> `;
-  } 
+  }
 
-  for(let i = 0 ; i < 3 ; i ++) {
+  for (let i = 0; i < 3; i++) {
     node = document.querySelector(`.answers-${i + 1}`);
     n = quizz.questions[0].answers.length;
 
-    for(let j = 0 ; j < n ; j ++) {
-      let elemento = quizz.questions[i].answers[j]
+    for (let j = 0; j < n; j++) {
+      let elemento = quizz.questions[i].answers[j];
       node.innerHTML += `
       <div class="answer" onclick="checaResposta(this, ${id}, '${tipo}', ${j})">
         <img src="${elemento.image}">
@@ -600,54 +602,55 @@ function exibirQuizz(id, tipo) {
     <button class="back-home" onclick="telaInicial()">Voltar para home</button>
     `;
 
-    document.querySelector(".title").scrollIntoView();
+  document.querySelector(".title").scrollIntoView();
 }
 
-
 function checaResposta(resposta, id, tipo, j) {
-  if(resposta.classList.contains("right") || resposta.classList.contains("wrong")) {
+  if (
+    resposta.classList.contains("right") ||
+    resposta.classList.contains("wrong")
+  ) {
     return;
   }
-  
+
   let quizz = buscaPorId(id, tipo);
-  
+
   let opcoes = resposta.parentNode.childNodes;
   let gabarito = quizz.questions[j].answers;
   let n = opcoes.length;
 
-  for(let i = 0 ; i < (n - 1) ; i += 2) {
-    if(gabarito[i/2].isCorrectAnswer === true) {
+  for (let i = 0; i < n - 1; i += 2) {
+    if (gabarito[i / 2].isCorrectAnswer === true) {
       opcoes[i + 1].classList.add("right");
     } else {
-        opcoes[i + 1].classList.add("wrong");
-      }
+      opcoes[i + 1].classList.add("wrong");
+    }
   }
 
-  if(resposta.classList.contains("right")) {
-    acertos ++;
+  if (resposta.classList.contains("right")) {
+    acertos++;
   }
 
   let cliques = document.querySelectorAll(".right").length;
-  
+
   let proxima;
-  if(resposta.parentNode.parentNode.classList.contains("1")) {
+  if (resposta.parentNode.parentNode.classList.contains("1")) {
     proxima = resposta.parentNode.parentNode.parentNode.childNodes[5];
     setTimeout(proximoItem, 2000, proxima);
   }
-  if(resposta.parentNode.parentNode.classList.contains("2")) {
+  if (resposta.parentNode.parentNode.classList.contains("2")) {
     proxima = resposta.parentNode.parentNode.parentNode.childNodes[7];
     setTimeout(proximoItem, 2000, proxima);
   }
- 
-  if(cliques === quizz.questions.length) {
+
+  if (cliques === quizz.questions.length) {
     const score = calculaPontuacao(cliques);
     exibirResultado(score, id, tipo);
-  }  
+  }
 }
 
-
 function calculaPontuacao(n) {
-  const score = Math.round((acertos/n)*100);
+  const score = Math.round((acertos / n) * 100);
   return score;
 }
 
@@ -659,14 +662,14 @@ function exibirResultado(score, id, tipo) {
   let quizz = buscaPorId(id, tipo);
   let nivel;
 
-  for(let i = 0 ; i < quizz.levels.length ; i ++) {
-    if(score >= quizz.levels[i].minValue) {
+  for (let i = 0; i < quizz.levels.length; i++) {
+    if (score >= quizz.levels[i].minValue) {
       nivel = quizz.levels[i];
     } else {
-        i = quizz.levels.length;
+      i = quizz.levels.length;
     }
   }
-  
+
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
       <div><h3>${score}% de acerto: ${nivel.title}</h3></div>
@@ -676,6 +679,6 @@ function exibirResultado(score, id, tipo) {
       </div>
   </div>`;
 
-  const resultado = document.querySelector(".result")
+  const resultado = document.querySelector(".result");
   setTimeout(proximoItem, 2000, resultado);
 }
