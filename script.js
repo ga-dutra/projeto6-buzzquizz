@@ -607,7 +607,7 @@ function exibirQuizz(id, tipo) {
       <div class="quizz-display ${i + 1}">
         <div class="question"  style="background-color: ${
           quizz.questions[i].color
-        }"><h3>${quizz.questions[i].text}</h3></div>
+        }"><h3>${quizz.questions[i].title}</h3></div>
         <div class="answers-${i + 1}"></div>  
       </div> `;
   }
