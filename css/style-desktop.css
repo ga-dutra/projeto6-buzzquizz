@@ -158,6 +158,8 @@ p {
   left: 17px;
   bottom: 20px;
   z-index: 2;
+  max-width: 320px;
+  word-break: break-word;
 }
 
 .home-page ion-icon {
