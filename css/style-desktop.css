@@ -148,8 +148,7 @@ p {
   z-index: 1;
 }
 
-.quizz:nth-child(2),
-.quizz:nth-child(5) {
+.quizz:nth-child(3n-1) {
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -329,7 +328,7 @@ p {
 .final-page button {
   width: 221px;
   max-width: 100vw;
-  margin-top: 10px;
+  margin-top: 26px;
 }
 
 .quizz-page {
@@ -503,7 +502,4 @@ p {
   display: none;
 }
 
-<<<<<<< HEAD
 /* teste commit */
-=======
->>>>>>> bfb3e2601b2941f3b50c1f88708b741e1d00c0bb
