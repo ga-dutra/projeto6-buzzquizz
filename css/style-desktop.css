@@ -513,13 +513,12 @@ p {
 }
 
 .loading-page img {
-  width: 20vw; 
+  width: 20vw;
   margin-top: 200px;
 }
 
 .loading-page p {
   font-size: 25px;
-  color: #EC362D;
+  color: #ec362d;
   margin-top: 50px;
 }
-

@@ -401,7 +401,6 @@ let answers = [];
 let levels = [];
 
 function criaQuizzUsuario() {
-  
   const promise = axios.post(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
     quizz_usuario
@@ -499,7 +498,7 @@ let quizzes = [];
 
 function renderizarQuizzesTodos(resposta) {
   paginaLoading();
-  
+
   let lista = document.querySelector(".all-quizzes .quizz-list");
 
   quizzes = resposta.data;
@@ -551,7 +550,7 @@ function renderizarQuizzesUsuario() {
 
 function buscaPorId(id, tipo) {
   paginaLoading();
-  
+
   let lista;
 
   if (tipo === "todos") {
@@ -729,5 +728,5 @@ function exibirResultado(score, id, tipo) {
 //Bonus: loading
 
 function paginaLoading() {
-  document.querySelector(".loading-page").classList.toggle("escondido");    
+  document.querySelector(".loading-page").classList.toggle("escondido");
 }
