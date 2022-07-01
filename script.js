@@ -567,17 +567,20 @@ function exibirResultado(score, id, tipo) {
   let quizz = buscaPorId(id, tipo);
   let nivel;
 
-  //definir nível e acertar as variáveis
+  for(let i = 0 ; i < quizz.levels.length ; i ++) {
+    if(score >= quizz.levels[i].minValue) {
+      nivel = quizz.levels[i];
+    } else {
+        i = quizz.levels.length;
+    }
+  }
   
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
-      <div><h3>${score}% de acerto: texto texto texto</h3></div>
+      <div><h3>${score}% de acerto: ${nivel.title}</h3></div>
       <div>
-        <img src="./img/quiz.jpg">
-        <p>texto texto texto texto texto texto texto texto 
-            texto texto texto texto texto texto texto texto 
-            texto texto texto texto texto texto texto texto
-            texto texto texto texto texto texto texto</p>
+        <img src="${nivel.image}">
+        <p>${nivel.text}</p>
       </div>
   </div>`;
 
