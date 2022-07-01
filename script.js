@@ -580,15 +580,3 @@ function exibirResultado(score, id, tipo) {
   setTimeout(proximoItem, 2000, resultado);
 }
 
-//HTML do resultado:
-
-` <div class="quizz-display result">
-<div><h3>XX% de acerto: texto texto texto</h3></div>
-<div>
-    <img src="./img/quiz.jpg">
-    <p>texto texto texto texto texto texto texto texto 
-        texto texto texto texto texto texto texto texto 
-        texto texto texto texto texto texto texto texto
-        texto texto texto texto texto texto texto</p>
-</div>
-</div>`
