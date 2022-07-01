@@ -389,7 +389,7 @@ function pag4() {
       <h5>${titulo_quizz}</h5>
   </div>
   <button type="button" onclick="">Acessar Quizz</button>
-  <p onclick="telaInicial()>Voltar para home</p>
+  <p onclick="telaInicial()"> Voltar para home</p>
 </div>`;
   return criaQuizzPagina4;
 }
@@ -415,8 +415,21 @@ function erroEnvioQuizz() {
 
 function chamaTelaFinalCriacaoQuizz(element) {
   quizzesUsuario.push(element.data.id);
-  console.log(element);
-  console.log(`element.data.id : ${element.data.id}`);
+  salvaLocalStorage(element.data.id);
+}
+
+function iniciaLocalStorage() {
+  const existeQuizz = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  if (!existeQuizz) {
+    localStorage.setItem("quizzesUsuario", JSON.stringify([]));
+  }
+}
+iniciaLocalStorage();
+
+function salvaLocalStorage(id_quizz) {
+  let quizzes_usuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  quizzes_usuario.push(id_quizz);
+  localStorage.setItem("quizzesUsuario", JSON.stringify(quizzes_usuario));
   telaCriacaoQuizz(4);
 }
 
@@ -674,7 +687,7 @@ function exibirResultado(score, id, tipo) {
   node.parentNode.removeChild(node);
   node = document.querySelector(".back-home");
   node.parentNode.removeChild(node);
-  
+
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
       <div><h3>${score}% de acerto: ${nivel.title}</h3></div>

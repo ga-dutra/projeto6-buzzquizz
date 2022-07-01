@@ -148,11 +148,7 @@ p {
   z-index: 1;
 }
 
-<<<<<<< HEAD
-.quizz:nth-child(3n-1) {
-=======
-.quizz:nth-child(3n  - 1) {
->>>>>>> bde8f72f472d2d44802a1560068cd5a281dfca96
+.quizz:nth-child(3n - 1) {
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -400,7 +396,6 @@ p {
 .quizz-display h4 {
   margin-top: 8px;
 }
-
 
 .question,
 .result div:first-child {
