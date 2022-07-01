@@ -564,9 +564,14 @@ function proximoItem(elemento) {
 }
 
 function exibirResultado(score, id, tipo) {
+  let quizz = buscaPorId(id, tipo);
+  let nivel;
+
+  //definir nível e acertar as variáveis
+  
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
-      <div><h3>XX% de acerto: texto texto texto</h3></div>
+      <div><h3>${score}% de acerto: texto texto texto</h3></div>
       <div>
         <img src="./img/quiz.jpg">
         <p>texto texto texto texto texto texto texto texto 
@@ -579,4 +584,3 @@ function exibirResultado(score, id, tipo) {
   const resultado = document.querySelector(".result")
   setTimeout(proximoItem, 2000, resultado);
 }
-
