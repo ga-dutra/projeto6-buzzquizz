@@ -361,7 +361,7 @@ function telaInicial() {
   document.querySelector(".current-page").innerHTML = HomePage;
   carregarQuizzes();
 }
-//telaInicial();
+telaInicial();
 
 // Carregamento e listagem dos quizzes
 
@@ -380,17 +380,19 @@ function erroListagem(erro) {
   alert("Erro: não foi possível carregar os quizzes!");
 }
 
+let quizzes = [];
+
 function renderizarQuizzesTodos(resposta) {
   let lista = document.querySelector(".all-quizzes .quizz-list");
-  let quizzes = [];
+ 
   quizzes = resposta.data;
   const n = quizzes.length;
 
   lista.innerHTML = "";
 
-  for (let i = n - 1; i >= n - 6; i--) {
+  for (let i = 0; i < n ; i ++) {
     lista.innerHTML += `
-    <div class="quizz" onclick="exibirQuizz(${quizzes[i]})">
+    <div class="quizz" onclick="exibirQuizz(${quizzes[i].id}, 'todos')">
        <img src=${quizzes[i].image}>
        <div></div>
        <h5>${quizzes[i].title}</h5>
@@ -412,9 +414,9 @@ function renderizarQuizzesUsuario() {
 
     lista.innerHTML = "";
 
-    for (let i = 0; i > n && i < 6; i++) {
+    for (let i = 0 ; i > n ; i ++) {
       lista.innerHTML += `
-        <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i]})">
+        <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i].id}, 'usuario')">
           <img src=${quizzesUsuario[i].image}>
           <div></div>
           <h5>${quizzesUsuario[i].title}</h5>
@@ -425,4 +427,79 @@ function renderizarQuizzesUsuario() {
 
 // Exibição de um quizz
 
-function exibirQuizz(quizz) {}
+function buscaPorId(id, lista) {
+  for(let i = 0 ; i < lista.length ; i++) {
+    if(lista[i].id === id) {
+      return lista[i];
+    }
+  }
+  alert("Erro: Não foi possível encontrar o quizz!");
+}
+
+function comparador() { 
+	return Math.random() - 0.5; 
+}
+
+function exibirQuizz(id, tipo) {
+  let quizz;
+
+  if(tipo === "todos") {
+    quizz = buscaPorId(id, quizzes)
+  } 
+  
+  if(tipo === "usuario") {
+    quizz = buscaPorId(id, quizzesUsuario)
+  }
+
+  if(quizz == undefined) {
+    return;
+  }
+
+  for(let i = 0 ; i < 3 ; i ++) {
+    quizz.questions[i].answers.sort(comparador);
+  }
+
+  let node = document.querySelector(".current-page");
+
+  node.innerHTML = `
+  <div class="quizz-page">
+    <div class="title">
+      <img src="${quizz.image}">
+      <div></div>
+      <h2>${quizz.title}</h2>
+    </div>
+  </div>`;
+
+  let n = quizz.questions.length;
+  node = document.querySelector(".quizz-page");
+   
+  for(let i = 0 ; i < n ; i ++) {
+    node.innerHTML += `
+      <div class="quizz-display">
+        <div class="question"  style="background-color: ${quizz.questions[i].color}"><h3>${quizz.questions[i].text}</h3></div>
+        <div class="answers-${i + 1}"></div>  
+      </div> `;
+  } 
+
+  for(let i = 0 ; i < 3 ; i ++) {
+    node = document.querySelector(`.answers-${i + 1}`);
+    n = quizz.questions[0].answers.length;
+
+    for(let j = 0 ; j < n ; j ++) {
+      let elemento = quizz.questions[i].answers[j]
+      node.innerHTML += `
+      <div class="answer">
+        <img src="${elemento.image}">
+        <h4>${elemento.text}</h4>
+      </div>`;
+    }
+  }
+
+  node = document.querySelector(".quizz-page");
+
+  node.innerHTML += `
+    <button class="restart" onclick="exibirQuizz(quizz)">Reiniciar Quizz</button>
+
+    <button class="back-home" onclick="telaInicial()">Voltar para home</button>
+    `;
+}

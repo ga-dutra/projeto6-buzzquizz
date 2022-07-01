@@ -87,6 +87,7 @@
   .quizz-display h4 {
     margin-top: 4px;
     font-size: 13px;
+    max-width: 164px;
   } 
   
   .question-1,
