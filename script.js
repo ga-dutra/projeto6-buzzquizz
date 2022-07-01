@@ -414,8 +414,8 @@ function erroEnvioQuizz() {
 }
 
 function chamaTelaFinalCriacaoQuizz(element) {
-  quizzesUsuario.push(element.data.id);
-  salvaLocalStorage(element.data.id);
+  quizzesUsuario.push(element.data);
+  salvaLocalStorage(element.data);
 }
 
 function iniciaLocalStorage() {
@@ -448,11 +448,12 @@ const comQuizz = `
     <ion-icon onclick="telaCriacaoQuizz(1)" name="add-circle"></ion-icon>
   </span>
 
-  <div class="quizz-list"></div>-->
+  <div class="quizz-list"></div>
 `;
 
 HomePage = `<div class="home-page">
-        <div class="your-quizzes empty"></div>
+        <div class="your-quizzes empty">
+        </div>
 
         <div class="all-quizzes">
             <h4>Todos os Quizzes</h4>
@@ -506,7 +507,8 @@ function renderizarQuizzesTodos(resposta) {
 
 function renderizarQuizzesUsuario() {
   let userQuizList = document.querySelector(".your-quizzes");
-
+  quizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  console.log(quizzesUsuario);
   if (quizzesUsuario[0] === undefined) {
     userQuizList.innerHTML = semQuizz;
   } else {
@@ -514,11 +516,15 @@ function renderizarQuizzesUsuario() {
     userQuizList.innerHTML = comQuizz;
 
     let lista = document.querySelector(".your-quizzes .quizz-list");
+    console.log(lista);
     const n = quizzesUsuario.length;
-
+    console.log(n);
+    console.log(quizzesUsuario[0].id);
+    console.log(quizzesUsuario[0].image);
+    console.log(quizzesUsuario[0].title);
     lista.innerHTML = "";
 
-    for (let i = 0; i > n; i++) {
+    for (let i = 0; i < n; i++) {
       lista.innerHTML += `
         <div class="quizz" onclick="exibirQuizz(${quizzesUsuario[i].id}, 'usuario')">
           <img src=${quizzesUsuario[i].image}>
