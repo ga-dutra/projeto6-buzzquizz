@@ -425,6 +425,7 @@ p {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .right h4 {
@@ -448,6 +449,7 @@ p {
   display: flex;
   justify-content: space-between;
   margin-top: 18px;
+  height: auto;
 }
 
 .result div:last-child img {
@@ -466,6 +468,7 @@ p {
 
 .result {
   padding: 15px;
+  height: auto;
 }
 
 .back-home {
