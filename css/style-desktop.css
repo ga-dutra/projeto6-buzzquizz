@@ -493,7 +493,33 @@ p {
 }
 
 .escondido {
-  display: none;
+  display: none !important;
 }
 
-/* teste commit */
+/* Bonus: loading*/
+
+.loading-page {
+  width: 100%;
+  height: 100vh;
+  margin-top: 69px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.loading-page img {
+  width: 20vw; 
+  margin-top: 200px;
+}
+
+.loading-page p {
+  font-size: 25px;
+  color: #EC362D;
+  margin-top: 50px;
+}
+

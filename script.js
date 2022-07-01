@@ -401,10 +401,12 @@ let answers = [];
 let levels = [];
 
 function criaQuizzUsuario() {
+  
   const promise = axios.post(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
     quizz_usuario
   );
+
   promise.catch(erroEnvioQuizz);
   promise.then(chamaTelaFinalCriacaoQuizz);
 }
@@ -460,12 +462,18 @@ HomePage = `<div class="home-page">
             <!--colocar pelo js-->
             <div class="quizz-list"></div>
 
+        </div>
+        
+        <div class="loading-page escondido">
+          <img src="./img/loading.jpg" alt="loading gif">
+          <p>Carregando</p>
         </div>`;
 
 function telaInicial() {
   document.querySelector(".current-page").innerHTML = HomePage;
   carregarQuizzes();
 }
+
 telaInicial();
 
 // Carregamento e listagem dos quizzes
@@ -474,6 +482,8 @@ function carregarQuizzes() {
   const promise = axios.get(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
+
+  paginaLoading();
 
   promise.catch(erroListagem);
   promise.then(renderizarQuizzesTodos);
@@ -488,6 +498,8 @@ function erroListagem(erro) {
 let quizzes = [];
 
 function renderizarQuizzesTodos(resposta) {
+  paginaLoading();
+  
   let lista = document.querySelector(".all-quizzes .quizz-list");
 
   quizzes = resposta.data;
@@ -538,6 +550,8 @@ function renderizarQuizzesUsuario() {
 // Exibição de um quizz
 
 function buscaPorId(id, tipo) {
+  paginaLoading();
+  
   let lista;
 
   if (tipo === "todos") {
@@ -567,6 +581,7 @@ function comparador() {
 let acertos;
 
 function exibirQuizz(id, tipo) {
+  paginaLoading();
   let quizz = buscaPorId(id, tipo);
   acertos = 0;
 
@@ -709,4 +724,10 @@ function exibirResultado(score, id, tipo) {
 
   const resultado = document.querySelector(".result");
   setTimeout(proximoItem, 2000, resultado);
+}
+
+//Bonus: loading
+
+function paginaLoading() {
+  document.querySelector(".loading-page").classList.toggle("escondido");    
 }
