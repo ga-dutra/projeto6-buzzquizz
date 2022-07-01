@@ -13,6 +13,11 @@
     padding: 0 50px;
   }
 
+  .quizz:nth-child(3n - 1) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .quizz-list {
     min-width: 350px;
   }
@@ -81,8 +86,14 @@
   .quizz-display h4 {
     margin-top: 4px;
     font-size: 13px;
+<<<<<<< HEAD
   }
 
+=======
+    max-width: 164px;
+  } 
+  
+>>>>>>> b53f9d6ce042c8fb5f807aa04a5179d9f0c316dd
   .question-1,
   .question-2,
   .question-3,
