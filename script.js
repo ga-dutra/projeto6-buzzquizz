@@ -660,6 +660,7 @@ function proximoItem(elemento) {
 function exibirResultado(score, id, tipo) {
   let quizz = buscaPorId(id, tipo);
   let nivel;
+  let node;
 
   for (let i = 0; i < quizz.levels.length; i++) {
     if (score >= quizz.levels[i].minValue) {
@@ -669,6 +670,11 @@ function exibirResultado(score, id, tipo) {
     }
   }
 
+  node = document.querySelector(".restart");
+  node.parentNode.removeChild(node);
+  node = document.querySelector(".back-home");
+  node.parentNode.removeChild(node);
+  
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
       <div><h3>${score}% de acerto: ${nivel.title}</h3></div>
@@ -676,7 +682,11 @@ function exibirResultado(score, id, tipo) {
         <img src="${nivel.image}">
         <p>${nivel.text}</p>
       </div>
-  </div>`;
+    </div>
+
+    <button class="restart" onclick="exibirQuizz(${id}, '${tipo}')">Reiniciar Quizz</button>
+
+    <button class="back-home" onclick="telaInicial()">Voltar para home</button>`;
 
   const resultado = document.querySelector(".result");
   setTimeout(proximoItem, 2000, resultado);
