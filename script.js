@@ -174,7 +174,6 @@ function testaParametrosPag2() {
     imgs_corretas_validas.length >= qtd_perguntas &&
     imgs_incorretas_validas.length >= qtd_perguntas
   ) {
-    alert("está tudo certo!");
     telaCriacaoQuizz(3);
   } else {
     alert(
@@ -235,7 +234,6 @@ function testaParametrosPag3() {
     url_nivel.length === url_nivel_validas.length &&
     descricao_nivel.length === descricao_nivel_validas.length
   ) {
-    alert("está tudo certo!");
     criaQuizzUsuario();
   } else {
     alert("Por favor, preencha os parâmetros corretamente!");
@@ -255,7 +253,6 @@ function checkUrl(string) {
 
 function checaCor(str) {
   if (str[0] !== "#" || str.length !== 7) {
-    // alert(str + " não é uma cor válida");
     return;
   } else {
     for (let i = 1; i < str.length; i++) {
@@ -264,7 +261,6 @@ function checaCor(str) {
           str[i]
         ) < 0
       ) {
-        // alert(str + " não é uma cor válida");
         return;
       }
     }
@@ -393,7 +389,7 @@ function pag4() {
       <h5>${titulo_quizz}</h5>
   </div>
   <button type="button" onclick="">Acessar Quizz</button>
-  <p>Voltar para home</p>
+  <p onclick="telaInicial()"> Voltar para home</p>
 </div>`;
   return criaQuizzPagina4;
 }
@@ -419,7 +415,23 @@ function erroEnvioQuizz() {
   alert("Ocorreu um erro ao tentarmos enviar o quizz para o servidor!");
 }
 
-function chamaTelaFinalCriacaoQuizz() {
+function chamaTelaFinalCriacaoQuizz(element) {
+  quizzesUsuario.push(element.data.id);
+  salvaLocalStorage(element.data.id);
+}
+
+function iniciaLocalStorage() {
+  const existeQuizz = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  if (!existeQuizz) {
+    localStorage.setItem("quizzesUsuario", JSON.stringify([]));
+  }
+}
+iniciaLocalStorage();
+
+function salvaLocalStorage(id_quizz) {
+  let quizzes_usuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  quizzes_usuario.push(id_quizz);
+  localStorage.setItem("quizzesUsuario", JSON.stringify(quizzes_usuario));
   telaCriacaoQuizz(4);
 }
 
@@ -435,7 +447,7 @@ const semQuizz = `
 const comQuizz = `
   <span>
     <h4>Seus quizzes</h4>
-    <ion-icon name="add-circle"></ion-icon>
+    <ion-icon onclick="telaCriacaoQuizz(1)" name="add-circle"></ion-icon>
   </span>
 
   <div class="quizz-list"></div>-->
@@ -690,7 +702,7 @@ function exibirResultado(score, id, tipo) {
   node.parentNode.removeChild(node);
   node = document.querySelector(".back-home");
   node.parentNode.removeChild(node);
-  
+
   document.querySelector(".quizz-page").innerHTML += `
     <div class="quizz-display result">
       <div><h3>${score}% de acerto: ${nivel.title}</h3></div>
