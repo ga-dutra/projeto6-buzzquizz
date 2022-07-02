@@ -146,7 +146,7 @@ function testaParametrosPag2() {
   const imgs_incorretas_validas = imgs_incorretas.filter(checkUrl);
 
   for (i = 0; i < qtd_perguntas; i++) {
-    for (j = 0; j < qtd_perguntas; j++) {
+    for (j = 0; j <= qtd_perguntas; j++) {
       if (j === 0) {
         questions[i].answers[j] = {
           text: document.querySelector(`#resposta-correta${i + 1}`).value,
@@ -155,7 +155,9 @@ function testaParametrosPag2() {
         };
       } else if (
         wrong_answers[i][j - 1] !== "" &&
-        wrong_imgs[i][j - 1] !== ""
+        wrong_answers[i][j - 1] !== undefined &&
+        wrong_imgs[i][j - 1] !== "" &&
+        wrong_imgs[i][j - 1] !== undefined
       ) {
         questions[i].answers[j] = {
           text: wrong_answers[i][j - 1],
@@ -519,7 +521,6 @@ function renderizarQuizzesTodos(resposta) {
 function renderizarQuizzesUsuario() {
   let userQuizList = document.querySelector(".your-quizzes");
   quizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
-  console.log(quizzesUsuario);
   if (quizzesUsuario[0] === undefined) {
     userQuizList.innerHTML = semQuizz;
   } else {
@@ -527,12 +528,7 @@ function renderizarQuizzesUsuario() {
     userQuizList.innerHTML = comQuizz;
 
     let lista = document.querySelector(".your-quizzes .quizz-list");
-    console.log(lista);
     const n = quizzesUsuario.length;
-    console.log(n);
-    console.log(quizzesUsuario[0].id);
-    console.log(quizzesUsuario[0].image);
-    console.log(quizzesUsuario[0].title);
     lista.innerHTML = "";
 
     for (let i = 0; i < n; i++) {
