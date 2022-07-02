@@ -313,7 +313,6 @@ function pag2() {
           <input type="text" id="cor-pergunta${
             i + 1
           }" placeholder="Cor do fundo da pergunta" required>
-
           <h4>Resposta correta</h4>
           <input type="text" id="resposta-correta${
             i + 1
@@ -321,7 +320,6 @@ function pag2() {
           <input type="url" id="url-img-correta${
             i + 1
           }" placeholder="URL da imagem" required>
-
           <h4>Respostas incorretas</h4>
           <input type="text" id="resposta-incorreta${
             i + 1
@@ -384,7 +382,6 @@ function pag3() {
 function pag4() {
   criaQuizzPagina4 = `<div class="new-quizz final-page">
   <h3>Seu quizz está pronto!</h3>
-
   <div class="quizz" onclick="exibirQuizz()">
       <img src=${url_quizz}>
       <div></div>
@@ -450,19 +447,16 @@ const comQuizz = `
     <h4>Seus quizzes</h4>
     <ion-icon onclick="telaCriacaoQuizz(1)" name="add-circle"></ion-icon>
   </span>
-
   <div class="quizz-list"></div>
 `;
 
 HomePage = `<div class="home-page">
         <div class="your-quizzes empty">
         </div>
-
         <div class="all-quizzes">
             <h4>Todos os Quizzes</h4>
             <!--colocar pelo js-->
             <div class="quizz-list"></div>
-
         </div>
         
         <div class="loading-page escondido">
@@ -521,6 +515,7 @@ function renderizarQuizzesTodos(resposta) {
 function renderizarQuizzesUsuario() {
   let userQuizList = document.querySelector(".your-quizzes");
   quizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
+  console.log(quizzesUsuario);
   if (quizzesUsuario[0] === undefined) {
     userQuizList.innerHTML = semQuizz;
   } else {
@@ -528,7 +523,12 @@ function renderizarQuizzesUsuario() {
     userQuizList.innerHTML = comQuizz;
 
     let lista = document.querySelector(".your-quizzes .quizz-list");
+    console.log(lista);
     const n = quizzesUsuario.length;
+    console.log(n);
+    console.log(quizzesUsuario[0].id);
+    console.log(quizzesUsuario[0].image);
+    console.log(quizzesUsuario[0].title);
     lista.innerHTML = "";
 
     for (let i = 0; i < n; i++) {
@@ -626,7 +626,6 @@ function exibirQuizz(id, tipo) {
 
   node.innerHTML += `
     <button class="restart" onclick="exibirQuizz(${id}, '${tipo}')">Reiniciar Quizz</button>
-
     <button class="back-home" onclick="telaInicial()">Voltar para home</button>
     `;
 
@@ -712,9 +711,7 @@ function exibirResultado(score, id, tipo) {
         <p>${nivel.text}</p>
       </div>
     </div>
-
     <button class="restart" onclick="exibirQuizz(${id}, '${tipo}')">Reiniciar Quizz</button>
-
     <button class="back-home" onclick="telaInicial()">Voltar para home</button>`;
 
   const resultado = document.querySelector(".result");
@@ -725,8 +722,8 @@ function exibirResultado(score, id, tipo) {
 
 function paginaLoading() {
   const node = document.querySelector(".loading-page");
-  
-  if(node != undefined) {
-    node.classList.toggle("escondido");   
-  }  
+
+  if (node != undefined) {
+    node.classList.toggle("escondido");
+  }
 }
