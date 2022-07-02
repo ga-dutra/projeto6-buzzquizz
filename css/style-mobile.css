@@ -5,12 +5,12 @@
     width: 340px;
   }
 
-  .all-quizzes {
-    margin: 35px 0;
-  }
-
   .empty p {
     padding: 0 50px;
+  }
+
+  .quizz h5 {
+    max-width: 309px;
   }
 
   .quizz:nth-child(3n - 1) {
@@ -116,7 +116,6 @@
 
   .result div:last-child p {
     width: 340px;
-    max-height: 100px;
     margin-top: 9px;
   }
 

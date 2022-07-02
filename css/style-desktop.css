@@ -158,6 +158,8 @@ p {
   left: 17px;
   bottom: 20px;
   z-index: 2;
+  max-width: 320px;
+  word-break: break-word;
 }
 
 .home-page ion-icon {
@@ -404,6 +406,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .question h3,
@@ -423,6 +426,7 @@ p {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .right h4 {
@@ -446,6 +450,7 @@ p {
   display: flex;
   justify-content: space-between;
   margin-top: 18px;
+  height: auto;
 }
 
 .result div:last-child img {
@@ -464,6 +469,7 @@ p {
 
 .result {
   padding: 15px;
+  height: auto;
 }
 
 .back-home {

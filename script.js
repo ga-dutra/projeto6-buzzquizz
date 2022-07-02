@@ -603,7 +603,7 @@ function exibirQuizz(id, tipo) {
       <div class="quizz-display ${i + 1}">
         <div class="question"  style="background-color: ${
           quizz.questions[i].color
-        }"><h3>${quizz.questions[i].text}</h3></div>
+        }"><h3>${quizz.questions[i].title}</h3></div>
         <div class="answers-${i + 1}"></div>  
       </div> `;
   }
@@ -724,5 +724,9 @@ function exibirResultado(score, id, tipo) {
 //Bonus: loading
 
 function paginaLoading() {
-  document.querySelector(".loading-page").classList.toggle("escondido");
+  const node = document.querySelector(".loading-page");
+  
+  if(node != undefined) {
+    node.classList.toggle("escondido");   
+  }  
 }
