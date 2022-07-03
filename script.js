@@ -23,12 +23,6 @@ let qtd_perguntas;
 let qtd_niveis;
 
 function testaParametrosPag1() {
-  quizz_usuario = {
-    title: document.querySelector(`#titulo-quizz`).value,
-    image: document.querySelector(`#url-img-quizz`).value,
-    questions: "",
-    levels: "",
-  };
   // obtem parâmetros dos inputs
   titulo_quizz = document.querySelector("#titulo-quizz").value;
   url_quizz = document.querySelector("#url-img-quizz").value;
@@ -40,12 +34,58 @@ function testaParametrosPag1() {
   const qtd_perguntas_valido = qtd_perguntas >= 3;
   const qtd_niveis_valido = qtd_niveis >= 2;
 
+  // Bônus dos inputs errados
+  if (!titulo_valido) {
+    document.querySelector("#erro-titulo-quizz").innerHTML =
+      "O título do quizz deve ter entre 20 e 65 caracteres";
+    document.querySelector("input#titulo-quizz").classList.add("wrong-input");
+  } else {
+    document.querySelector("#erro-titulo-quizz").innerHTML = "";
+    document
+      .querySelector("input#titulo-quizz")
+      .classList.remove("wrong-input");
+  }
+  if (!url_valido) {
+    document.querySelector("#erro-url-quizz").innerHTML =
+      "O valor informado não é uma url válida";
+    document.querySelector("input#url-img-quizz").classList.add("wrong-input");
+  } else {
+    document.querySelector("#erro-url-quizz").innerHTML = "";
+    document
+      .querySelector("input#url-img-quizz")
+      .classList.remove("wrong-input");
+  }
+  if (!qtd_perguntas_valido) {
+    document.querySelector("#erro-qtd-perguntas-quizz").innerHTML =
+      "O quizz deve ter no mínimo 3 perguntas";
+    document.querySelector("input#qtd-perguntas").classList.add("wrong-input");
+  } else {
+    document.querySelector("#erro-qtd-perguntas-quizz").innerHTML = "";
+    document
+      .querySelector("input#qtd-perguntas")
+      .classList.remove("wrong-input");
+  }
+  if (!qtd_niveis_valido) {
+    document.querySelector("#erro-qtd-niveis-quizz").innerHTML =
+      "O quizz deve ter no mínimo 2 niveis";
+    document.querySelector("input#qtd-niveis").classList.add("wrong-input");
+  } else {
+    document.querySelector("#erro-qtd-niveis-quizz").innerHTML = "";
+    document.querySelector("input#qtd-niveis").classList.remove("wrong-input");
+  }
+
   if (
     titulo_valido &&
     url_valido &&
     qtd_perguntas_valido &&
     qtd_niveis_valido
   ) {
+    quizz_usuario = {
+      title: document.querySelector(`#titulo-quizz`).value,
+      image: document.querySelector(`#url-img-quizz`).value,
+      questions: "",
+      levels: "",
+    };
     telaCriacaoQuizz(2);
   } else {
     alert("Os parâmetros digitados não são válidos!");
@@ -59,16 +99,6 @@ function testaParametrosPag2() {
   let respostas_incorretas = [];
   let imgs_corretas = [];
   let imgs_incorretas = [];
-
-  for (i = 0; i < qtd_perguntas; i++) {
-    questions[i] = {
-      title: document.querySelector(`#texto-pergunta${i + 1}`).value,
-      color: document.querySelector(`#cor-pergunta${i + 1}`).value,
-      answers: [],
-    };
-  }
-
-  quizz_usuario.questions = questions;
   let wrong_answers = [[]];
   let wrong_imgs = [[]];
   for (i = 1; i < qtd_perguntas; i++) {
@@ -122,6 +152,34 @@ function testaParametrosPag2() {
     imgs_incorretas.push(
       document.querySelector(`#url-img-incorreta${i + 1}-3`).value
     );
+
+    // Bônus - testando valores dos inputs
+    if (
+      (document.querySelector(`#texto-pergunta${i + 1}`).value, length < 20)
+    ) {
+      document.querySelector(`#erro-texto-pergunta${i + 1}`).innerHTML =
+        "A pergunta deve ter pelo menos 20 caracteres";
+      document
+        .querySelector(`#texto-pergunta${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-texto-pergunta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#texto-pergunta${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (!checaCor(document.querySelector(`#cor-pergunta${i + 1}`).value)) {
+      document.querySelector(`#erro-cor-pergunta${i + 1}`).innerHTML =
+        "A cor deve estar no formato hexadecimal válido";
+      document
+        .querySelector(`#cor-pergunta${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-cor-pergunta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#cor-pergunta${i + 1}`)
+        .classList.remove("wrong-input");
+    }
   }
 
   const perguntas_validas = perguntas.filter(function (str) {
@@ -145,29 +203,6 @@ function testaParametrosPag2() {
   const imgs_corretas_validas = imgs_corretas.filter(checkUrl);
   const imgs_incorretas_validas = imgs_incorretas.filter(checkUrl);
 
-  for (i = 0; i < qtd_perguntas; i++) {
-    for (j = 0; j <= qtd_perguntas; j++) {
-      if (j === 0) {
-        questions[i].answers[j] = {
-          text: document.querySelector(`#resposta-correta${i + 1}`).value,
-          image: document.querySelector(`#url-img-correta${i + 1}`).value,
-          isCorrectAnswer: true,
-        };
-      } else if (
-        wrong_answers[i][j - 1] !== "" &&
-        wrong_answers[i][j - 1] !== undefined &&
-        wrong_imgs[i][j - 1] !== "" &&
-        wrong_imgs[i][j - 1] !== undefined
-      ) {
-        questions[i].answers[j] = {
-          text: wrong_answers[i][j - 1],
-          image: wrong_imgs[i][j - 1],
-          isCorrectAnswer: false,
-        };
-      }
-    }
-  }
-
   if (
     perguntas.length === perguntas_validas.length &&
     cores.length === cores_validas.length &&
@@ -176,6 +211,37 @@ function testaParametrosPag2() {
     imgs_corretas_validas.length >= qtd_perguntas &&
     imgs_incorretas_validas.length >= qtd_perguntas
   ) {
+    for (i = 0; i < qtd_perguntas; i++) {
+      questions[i] = {
+        title: document.querySelector(`#texto-pergunta${i + 1}`).value,
+        color: document.querySelector(`#cor-pergunta${i + 1}`).value,
+        answers: [],
+      };
+    }
+
+    for (i = 0; i < qtd_perguntas; i++) {
+      for (j = 0; j <= qtd_perguntas; j++) {
+        if (j === 0) {
+          questions[i].answers[j] = {
+            text: document.querySelector(`#resposta-correta${i + 1}`).value,
+            image: document.querySelector(`#url-img-correta${i + 1}`).value,
+            isCorrectAnswer: true,
+          };
+        } else if (
+          wrong_answers[i][j - 1] !== "" &&
+          wrong_answers[i][j - 1] !== undefined &&
+          wrong_imgs[i][j - 1] !== "" &&
+          wrong_imgs[i][j - 1] !== undefined
+        ) {
+          questions[i].answers[j] = {
+            text: wrong_answers[i][j - 1],
+            image: wrong_imgs[i][j - 1],
+            isCorrectAnswer: false,
+          };
+        }
+      }
+    }
+    quizz_usuario.questions = questions;
     telaCriacaoQuizz(3);
   } else {
     alert(
@@ -191,18 +257,6 @@ function testaParametrosPag3() {
   let descricao_nivel = [];
 
   for (i = 0; i < qtd_niveis; i++) {
-    levels[i] = {
-      title: String(document.querySelector(`#titulo-nivel${i + 1}`).value),
-      image: String(document.querySelector(`#url-nivel${i + 1}`).value),
-      text: String(document.querySelector(`#descricao-nivel${i + 1}`).value),
-      minValue: String(
-        document.querySelector(`#porcentagem-nivel${i + 1}`).value
-      ),
-    };
-  }
-  quizz_usuario.levels = levels;
-
-  for (i = 0; i < qtd_niveis; i++) {
     titulo_nivel.push(document.querySelector(`#titulo-nivel${i + 1}`).value);
     porcentagem.push(
       document.querySelector(`#porcentagem-nivel${i + 1}`).value
@@ -211,6 +265,62 @@ function testaParametrosPag3() {
     descricao_nivel.push(
       document.querySelector(`#descricao-nivel${i + 1}`).value
     );
+
+    // bônus - testando valores dos inputs
+    if ((document.querySelector(`#titulo-nivel${i + 1}`).value, length < 10)) {
+      document.querySelector(`#erro-titulo-nivel${i + 1}`).innerHTML =
+        "O título do nível deve ter pelo menos 20 caracteres";
+      document
+        .querySelector(`#titulo-nivel${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-titulo-nivel${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#titulo-nivel${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (!checkUrl(document.querySelector(`#url-nivel${i + 1}`))) {
+      document.querySelector(`#erro-url-nivel${i + 1}`).innerHTML =
+        "O valor informado não é uma url válida";
+      document.querySelector(`#url-nivel${i + 1}`).classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-url-nivel${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#url-nivel${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (
+      document.querySelector(`#porcentagem-nivel${i + 1}`).value < 0 ||
+      document.querySelector(`#porcentagem-nivel${i + 1}`).value > 100 ||
+      document.querySelector(`#porcentagem-nivel${i + 1}`).value ===
+        undefined ||
+      document.querySelector(`#porcentagem-nivel${i + 1}`).value === ""
+    ) {
+      document.querySelector(`#erro-porcentagem-nivel${i + 1}`).innerHTML =
+        "A porcentagem deve ser um valor entre 0 e 100";
+      document
+        .querySelector(`#porcentagem-nivel${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-porcentagem-nivel${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#porcentagem-nivel${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (
+      (document.querySelector(`#descricao-nivel${i + 1}`).value, length < 30)
+    ) {
+      document.querySelector(`#erro-descricao-nivel${i + 1}`).innerHTML =
+        "A descrição do nível deve possuir pelo menos 30 caracteres";
+      document
+        .querySelector(`#descricao-nivel${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-descricao-nivel${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#descricao-nivel${i + 1}`)
+        .classList.remove("wrong-input");
+    }
   }
 
   const titulo_nivel_validas = titulo_nivel.filter(function (str) {
@@ -236,6 +346,21 @@ function testaParametrosPag3() {
     url_nivel.length === url_nivel_validas.length &&
     descricao_nivel.length === descricao_nivel_validas.length
   ) {
+    if (!checaPorcentagens(porcentagem)) {
+      alert("Pelo menos um dos níveis deve ter porcentagem mínima de 0!");
+      return;
+    }
+    for (i = 0; i < qtd_niveis; i++) {
+      levels[i] = {
+        title: String(document.querySelector(`#titulo-nivel${i + 1}`).value),
+        image: String(document.querySelector(`#url-nivel${i + 1}`).value),
+        text: String(document.querySelector(`#descricao-nivel${i + 1}`).value),
+        minValue: String(
+          document.querySelector(`#porcentagem-nivel${i + 1}`).value
+        ),
+      };
+    }
+    quizz_usuario.levels = levels;
     criaQuizzUsuario();
   } else {
     alert("Por favor, preencha os parâmetros corretamente!");
@@ -270,6 +395,14 @@ function checaCor(str) {
   return true;
 }
 
+function checaPorcentagens(array) {
+  for (i = 0; i < array.length; i++) {
+    if (array[i] == "0") {
+      return true;
+    }
+  }
+}
+
 function selecionaCaixaInput(element) {
   const parentNode = element.parentNode;
   const childNode = parentNode.childNodes[3]; // acessa a div container
@@ -287,9 +420,13 @@ criaQuizzPagina1 = `<div class="new-quizz">
 <form class="form-quizz1">
     <div class="inputs-container">
         <input type="text" id="titulo-quizz" minlength="20" maxlength="65" placeholder="Título do seu quizz" required>
+        <small id="erro-titulo-quizz"></small>
         <input type="url" id="url-img-quizz" placeholder="URL da imagem do seu quizz" required>
+        <small id="erro-url-quizz"></small>
         <input type="number" id="qtd-perguntas" min="3" placeholder="Quantidade de perguntas do quizz" required>
+        <small id="erro-qtd-perguntas-quizz"></small>
         <input type="number" id="qtd-niveis" min="2" placeholder="Quantidade de níveis do quizz" required>
+        <small id="erro-qtd-niveis-quizz"></small>
     </div>
     <button type="button" onclick="testaParametrosPag1()">Prosseguir para criar perguntas</button>
 </form>
@@ -310,9 +447,11 @@ function pag2() {
           <input type="text" id="texto-pergunta${
             i + 1
           }" minlength="20" placeholder="Texto da pergunta" required>
+          <small id="erro-texto-pergunta${i + 1}"></small>
           <input type="text" id="cor-pergunta${
             i + 1
           }" placeholder="Cor do fundo da pergunta" required>
+          <small id="erro-cor-pergunta${i + 1}"></small>
           <h4>Resposta correta</h4>
           <input type="text" id="resposta-correta${
             i + 1
@@ -363,15 +502,19 @@ function pag3() {
                 <input type="text" id="titulo-nivel${
                   i + 1
                 }" minlength="10" placeholder="Título do nível" required>
+                <small id="erro-titulo-nivel${i + 1}"></small>
                 <input type="number" id="porcentagem-nivel${
                   i + 1
                 }" placeholder="% de acerto mínima" min="0" min="100" required>
+                <small id="erro-porcentagem-nivel${i + 1}"></small>
                 <input type="url" id="url-nivel${
                   i + 1
                 }" min="3" placeholder="URL da imagem do nível" required>
+                <small id="erro-url-nivel${i + 1}"></small>
                 <textarea name="" id="descricao-nivel${
                   i + 1
                 }" placeholder="Descrição do nível" cols="30" rows="10"></textarea>
+                <small id="erro-descricao-nivel${i + 1}"></small>
             </div> </form> `;
   }
   criaQuizzPagina3 += `<button onclick="testaParametrosPag3()" type="button">Finalizar Quizz</button>     
@@ -387,10 +530,16 @@ function pag4() {
       <div></div>
       <h5>${titulo_quizz}</h5>
   </div>
-  <button type="button" onclick="">Acessar Quizz</button>
+  <button type="button" onclick="acessarQuizzCriado()">Acessar Quizz</button>
   <p onclick="telaInicial()"> Voltar para home</p>
 </div>`;
   return criaQuizzPagina4;
+}
+
+function acessarQuizzCriado() {
+  telaInicial();
+  const idQuizzCriado = quizzesUsuario[quizzesUsuario.length - 1].id;
+  exibirQuizz(idQuizzCriado, "usuario");
 }
 
 // Enviar quizz finalizado
@@ -515,7 +664,6 @@ function renderizarQuizzesTodos(resposta) {
 function renderizarQuizzesUsuario() {
   let userQuizList = document.querySelector(".your-quizzes");
   quizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
-  console.log(quizzesUsuario);
   if (quizzesUsuario[0] === undefined) {
     userQuizList.innerHTML = semQuizz;
   } else {
@@ -523,12 +671,8 @@ function renderizarQuizzesUsuario() {
     userQuizList.innerHTML = comQuizz;
 
     let lista = document.querySelector(".your-quizzes .quizz-list");
-    console.log(lista);
+
     const n = quizzesUsuario.length;
-    console.log(n);
-    console.log(quizzesUsuario[0].id);
-    console.log(quizzesUsuario[0].image);
-    console.log(quizzesUsuario[0].title);
     lista.innerHTML = "";
 
     for (let i = 0; i < n; i++) {
@@ -641,7 +785,6 @@ function checaResposta(resposta, id, tipo, j) {
   }
 
   let quizz = buscaPorId(id, tipo);
-
   let opcoes = resposta.parentNode.childNodes;
   let gabarito = quizz.questions[j].answers;
   let n = opcoes.length;
