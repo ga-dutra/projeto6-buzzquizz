@@ -397,6 +397,8 @@ p {
 
 .quizz-display h4 {
   margin-top: 8px;
+  max-width: 330px;
+  word-break: break-word;
 }
 
 .question,
@@ -465,6 +467,7 @@ p {
   text-align: left;
   font-weight: 700;
   line-height: 25px;
+  word-break: break-word;
 }
 
 .result {

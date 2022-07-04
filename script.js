@@ -519,7 +519,6 @@ function renderizarQuizzesTodos(resposta) {
 function renderizarQuizzesUsuario() {
   let userQuizList = document.querySelector(".your-quizzes");
   quizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"));
-  console.log(quizzesUsuario);
   if (quizzesUsuario[0] === undefined) {
     userQuizList.innerHTML = semQuizz;
   } else {
@@ -527,12 +526,7 @@ function renderizarQuizzesUsuario() {
     userQuizList.innerHTML = comQuizz;
 
     let lista = document.querySelector(".your-quizzes .quizz-list");
-    console.log(lista);
     const n = quizzesUsuario.length;
-    console.log(n);
-    console.log(quizzesUsuario[0].id);
-    console.log(quizzesUsuario[0].image);
-    console.log(quizzesUsuario[0].title);
     lista.innerHTML = "";
 
     for (let i = 0; i < n; i++) {
@@ -583,8 +577,10 @@ function exibirQuizz(id, tipo) {
   paginaLoading();
   let quizz = buscaPorId(id, tipo);
   acertos = 0;
+  let n = quizz.questions.length;
+  let k;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0 ; i < n ; i++) {
     quizz.questions[i].answers.sort(comparador);
   }
 
@@ -599,7 +595,6 @@ function exibirQuizz(id, tipo) {
     </div>
   </div>`;
 
-  let n = quizz.questions.length;
   node = document.querySelector(".quizz-page");
 
   for (let i = 0; i < n; i++) {
@@ -612,14 +607,14 @@ function exibirQuizz(id, tipo) {
       </div> `;
   }
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < n; i++) {
     node = document.querySelector(`.answers-${i + 1}`);
-    n = quizz.questions[0].answers.length;
+    k = quizz.questions[i].answers.length;
 
-    for (let j = 0; j < n; j++) {
+    for (let j = 0; j < k; j++) {
       let elemento = quizz.questions[i].answers[j];
       node.innerHTML += `
-      <div class="answer" onclick="checaResposta(this, ${id}, '${tipo}', ${j})">
+      <div class="answer" onclick="checaResposta(this, ${id}, '${tipo}', ${i})">
         <img src="${elemento.image}">
         <h4>${elemento.text}</h4>
       </div>`;
@@ -651,11 +646,11 @@ function checaResposta(resposta, id, tipo, j) {
   let gabarito = quizz.questions[j].answers;
   let n = opcoes.length;
 
-  for (let i = 0; i < n - 1; i += 2) {
+  for (let i = 0; i < n ; i += 2) {
     if (gabarito[i / 2].isCorrectAnswer === true) {
-      opcoes[i + 1].classList.add("right");
+      opcoes[i+1].classList.add("right");
     } else {
-      opcoes[i + 1].classList.add("wrong");
+      opcoes[i+1].classList.add("wrong");
     }
   }
 
