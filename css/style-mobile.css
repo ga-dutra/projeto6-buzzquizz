@@ -136,4 +136,8 @@
     font-weight: 400;
     margin-top: 34px;
   }
+
+  .home-page ion-icon {
+    margin-left: 190px;
+  }
 }

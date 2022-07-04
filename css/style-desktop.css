@@ -42,6 +42,7 @@ h5 {
 p {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  word-break: break-word;
 }
 
 .top {
@@ -68,7 +69,6 @@ p {
 .all-quizzes {
   margin-top: 146px;
   width: 1050px;
-  height: 181px;
 }
 
 .all-quizzes {
@@ -208,13 +208,15 @@ p {
   background-color: #ffffff;
   justify-content: space-evenly;
   margin-top: 29px;
-  padding: 12px 0;
+  padding: 16px 0 12px 0;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.035);
   position: relative;
 }
 
 .form-quizz2 .inputs-container {
   min-height: 900px;
+  padding-bottom: 20px;
+  margin-top: -20px;
 }
 
 .form-quizz .inputs-container {
@@ -252,7 +254,6 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 5000ms linear;
 }
 
 .form-quizz3 h4,
@@ -264,9 +265,8 @@ p {
   margin-left: 20px;
 }
 
-.form-quizz3 .inputs-container,
-.form-quizz2 .inputs-container {
-  height: 256px;
+.form-quizz3 .inputs-container {
+  height: 464px;
   justify-content: space-between;
   margin-top: 0px;
   padding-bottom: 20px;
@@ -530,4 +530,15 @@ p {
   font-size: 25px;
   color: #ec362d;
   margin-top: 50px;
+}
+
+small {
+  margin-left: 20px;
+  color: #ec362d;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+.wrong-input {
+  background-color: #ffe9e9;
 }
