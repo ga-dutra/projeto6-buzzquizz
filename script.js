@@ -180,6 +180,62 @@ function testaParametrosPag2() {
         .querySelector(`#cor-pergunta${i + 1}`)
         .classList.remove("wrong-input");
     }
+    if (document.querySelector(`#resposta-correta${i + 1}`).value.length < 1) {
+      document.querySelector(`#erro-resposta-correta${i + 1}`).innerHTML =
+        "O campo das respostas corretas não pode estar vazio!";
+      document
+        .querySelector(`#resposta-correta${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-resposta-correta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#resposta-correta${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (
+      !checkUrl(document.querySelector(`#url-img-correta${i + 1}`).value.length)
+    ) {
+      document.querySelector(`#erro-url-correta${i + 1}`).innerHTML =
+        "O valor informado não é uma URL válida";
+      document
+        .querySelector(`#url-img-correta${i + 1}`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-url-correta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#url-img-correta${i + 1}`)
+        .classList.remove("wrong-input");
+    }
+    if (
+      document.querySelector(`#resposta-incorreta${i + 1}-1`).value.length < 1
+    ) {
+      document.querySelector(`#erro-resposta-incorreta${i + 1}`).innerHTML =
+        "O campo das respostas incorretas não pode estar vazio!";
+      document
+        .querySelector(`#resposta-incorreta${i + 1}-1`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-resposta-incorreta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#resposta-incorreta${i + 1}-1`)
+        .classList.remove("wrong-input");
+    }
+    if (
+      !checkUrl(
+        document.querySelector(`#url-img-incorreta${i + 1}-1`).value.length
+      )
+    ) {
+      document.querySelector(`#erro-url-incorreta${i + 1}`).innerHTML =
+        "O valor informado não é uma URL válida";
+      document
+        .querySelector(`#url-img-incorreta${i + 1}-1`)
+        .classList.add("wrong-input");
+    } else {
+      document.querySelector(`#erro-url-incorreta${i + 1}`).innerHTML = "";
+      document
+        .querySelector(`#url-img-incorreta${i + 1}-1`)
+        .classList.remove("wrong-input");
+    }
   }
 
   const perguntas_validas = perguntas.filter(function (str) {
@@ -456,16 +512,20 @@ function pag2() {
           <input type="text" id="resposta-correta${
             i + 1
           }" placeholder="Resposta correta" required>
+          <small id="erro-resposta-correta${i + 1}"></small>
           <input type="url" id="url-img-correta${
             i + 1
           }" placeholder="URL da imagem" required>
+          <small id="erro-url-correta${i + 1}"></small>
           <h4>Respostas incorretas</h4>
           <input type="text" id="resposta-incorreta${
             i + 1
           }-1" placeholder="Resposta incorreta 1" required>
+          <small id="erro-resposta-incorreta${i + 1}"></small>
           <input type="url" id="url-img-incorreta${
             i + 1
           }-1" placeholder="URL da imagem 1" required>
+          <small id="erro-url-incorreta${i + 1}"></small>
           <br>
           <input type="text" id="resposta-incorreta${
             i + 1

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  word-break: break-word;
 }
 
 body {
@@ -42,7 +43,6 @@ h5 {
 p {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  word-break: break-word;
 }
 
 .top {
@@ -159,7 +159,6 @@ p {
   bottom: 20px;
   z-index: 2;
   max-width: 320px;
-  word-break: break-word;
 }
 
 .home-page ion-icon {
