@@ -610,7 +610,7 @@ let levels = [];
 
 function criaQuizzUsuario() {
   const promise = axios.post(
-    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+    "https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes",
     quizz_usuario
   );
 
@@ -684,7 +684,7 @@ telaInicial();
 
 function carregarQuizzes() {
   const promise = axios.get(
-    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+    "https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes"
   );
 
   paginaLoading();
@@ -786,7 +786,7 @@ function exibirQuizz(id, tipo) {
   let n = quizz.questions.length;
   let k;
 
-  for (let i = 0 ; i < n ; i++) {
+  for (let i = 0; i < n; i++) {
     quizz.questions[i].answers.sort(comparador);
   }
 
@@ -850,11 +850,11 @@ function checaResposta(resposta, id, tipo, j) {
   let gabarito = quizz.questions[j].answers;
   let n = opcoes.length;
 
-  for (let i = 0; i < n ; i += 2) {
+  for (let i = 0; i < n; i += 2) {
     if (gabarito[i / 2].isCorrectAnswer === true) {
-      opcoes[i+1].classList.add("right");
+      opcoes[i + 1].classList.add("right");
     } else {
-      opcoes[i+1].classList.add("wrong");
+      opcoes[i + 1].classList.add("wrong");
     }
   }
 
